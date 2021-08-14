@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Aspect ratio &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>🧷 芯片面积的确定体现在布局规划方案所使用 Floorplan Control Parameters上</p>
+<section id="aspect-ratio">
+<h1>Aspect ratio<a class="headerlink" href="#aspect-ratio" title="永久链接至标题">¶</a></h1>
+<p>Aspect ratio is the ratio between vertical routing resources to horizontal routing resources.</p>
+<div class="math notranslate nohighlight" id="equation-math-single">
+<span class="eqno">(1)<a class="headerlink" href="#equation-math-single" title="公式的永久链接">¶</a></span>\[\text{Aspect Ratio}(Ar) = \frac{\text{Horizontal routing resource} (H)}{\text{Vertical routing resource} (V)}\]</div>
+<p>Aspect ratio 指定芯片高度和宽度比值的方案 —— If you specify a ratio of 1.00, the height and width are the same and therefore the core is a square; If you specify a ratio of 3.00, the height is three times the width.</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>当设计中不含Macro时可以采用 Aspect ratio 布图规划控制参数进行试探，在最开始Trail的时候一般设置较小的利用率，看 Timing、DRC、LVS等结果如何，此时用时较短，能在短时间内给设计者一个参考，让设计者对 Floorplan 方案进行评估。如果设计的问题不大，那么可以逐渐提高利用率，减小芯片的面积。</p>
+</div>
+</section>
+<section id="width-and-height">
+<h1>Width and Height<a class="headerlink" href="#width-and-height" title="永久链接至标题">¶</a></h1>
+<p>指定高度和宽度，一般对于含有Macro的设计，多用这种方案</p>
+</section>
+<section id="id1">
+<h1>评估指标<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<section id="core-utilization-cu">
+<h2>Core Utilization (Cu)<a class="headerlink" href="#core-utilization-cu" title="永久链接至标题">¶</a></h2>
+<p>Core Utilization (<cite>Cu</cite>) indicates the amount of core area used for cell placement.</p>
+<p>The number is calculated as a ratio of the total cell area (for hard macros and standard cells or soft macro cells) to the core area.</p>
+<div class="math notranslate nohighlight" id="equation-math-single">
+<span class="eqno">(2)<a class="headerlink" href="#equation-math-single" title="公式的永久链接">¶</a></span>\[\text{Core Utilization(Cu)} =\frac{\text{ Standard Cell area}}{\text{Row area + Channel area}}\]</div>
+<p>A core utilization of 0.8, for example, means that 80% of the core area is used for cell placement and 20 percent is available for routing.</p>
+</section>
+<section id="row-to-core-ratio-rcr">
+<h2>Row to Core Ratio (Rcr):<a class="headerlink" href="#row-to-core-ratio-rcr" title="永久链接至标题">¶</a></h2>
+<p>Row to Core Ratio (<cite>Rcr</cite>) indicates the amount of channel space to provide for routing between the cell rows.</p>
+<p>The smaller the number, the more space is left for routing. A value of 1.0 leaves no routing channel space.</p>
+<div class="math notranslate nohighlight" id="equation-math-single">
+<span class="eqno">(3)<a class="headerlink" href="#equation-math-single" title="公式的永久链接">¶</a></span>\[\text{Rcr} = \frac{\text{Row area}}{\text{Core area (H * V)}}\]</div>
+</section>
+</section>
+<section id="total-utilization-t-f">
+<h1>Total utilization T(F)<a class="headerlink" href="#total-utilization-t-f" title="永久链接至标题">¶</a></h1>
+<p><em>Total utilization</em> <cite>T(F)</cite> of floorplan F is derived using the following equation:</p>
+<div class="math notranslate nohighlight" id="equation-math-single">
+<span class="eqno">(4)<a class="headerlink" href="#equation-math-single" title="公式的永久链接">¶</a></span>\[T(F) =\frac{A(m) + A(p) + A(s)}{A}\]</div>
+<ul class="simple">
+<li><p><cite>A(m)</cite> ： Area occupied by macros</p></li>
+<li><p><cite>A(p)</cite> ： Area occupied by Pads/ Pad fillers</p></li>
+<li><p><cite>A(s)</cite> ： Area occupied by Standard Cells</p></li>
+</ul>
+</section>
+<section id="cell-row-utilization">
+<h1>Cell row utilization<a class="headerlink" href="#cell-row-utilization" title="永久链接至标题">¶</a></h1>
+<p>Cell row utilization <cite>C(F)</cite> of floorplan F is approximated using the following equation:</p>
+<div class="math notranslate nohighlight" id="equation-math-single">
+<span class="eqno">(5)<a class="headerlink" href="#equation-math-single" title="公式的永久链接">¶</a></span>\[C(F) = \frac{A(s)}{A(R -\text{union}(B, E, m, p))}\]</div>
+<ul class="simple">
+<li><p><cite>R</cite> = All cell rows</p></li>
+<li><p><cite>B</cite> = All placement blockages</p></li>
+<li><p><cite>E</cite> = Exclusive Regions</p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">VLSI物理设计方法学</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../%E5%89%8D%E8%A8%80.html">前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Libraries.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Floorplanning.html">Floorplanning</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, QIAMKING.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/Floorplanning/确定芯片面积.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

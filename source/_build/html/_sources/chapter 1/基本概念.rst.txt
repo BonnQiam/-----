@@ -1,0 +1,20 @@
+基本概念
+------------
+
+工艺角
+^^^^^^^^^^^^^^^^^^^^
+
+最常用的工艺角为：
+    - 最佳 / 最快 -- BC / best case / fast
+    - 典型 / 正常 -- TC / typical case / normal
+    - 最差 / 最满 -- WC / worst case / slow
+
+PVT条件
+^^^^^^^^^^^^^^^^^^^^
+
+process（工艺）、temperature（温度）、voltage（电压）
+
+PDK
+^^^^^^^^^^^^^^^^^^^^
+
+PDK（process design kit） 主要包括技术文件（technology file）、器件模型、原理图符号（schematic symbol）、参数单元（P-Cell）、验证文件集（DRC/LVS/EXT）

@@ -1,0 +1,42 @@
+布局方案评估
+======================
+
+在完成标准单元布局优化完成后，需要对设计进行拥堵分析、静态时序分析、噪声分析、电源分析来评估布局方案的质量
+
+拥塞
+---------------------
+
+查看布局之后的拥塞
+.. code-block:: console
+    :linenos:
+    
+    $ report_congestion
+
+时序
+-----------------------
+
+报告最大路径延时，查看是否存在Setup Slack
+
+.. code-block:: console
+    :linenos:
+
+    $ report_timing
+
+报告是否存在时序 DRC 的违反
+
+.. code-block:: console
+    :linenos:
+    
+    $ report_constraint-all_violators
+
+此时设计中最好不要存在 Setup 的违反，可以存在Max Cap/tran、hold、Min Cap的违反
+
+MCMM
+^^^^^^^^^^^
+
+如果设计中有 MCMM，那么可以用下面的命令产生 MCMM 的报告同时产生相应的网页文件，方便查看：
+
+.. code-block:: console
+    :linenos:
+    
+    $ create_qor_snapshot-name cel_name

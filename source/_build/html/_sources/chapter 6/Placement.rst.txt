@@ -1,0 +1,38 @@
+Placement
+========================
+
+展平式布局
+----------------
+
+由于 I/O pad cell、macro 的布放都在布图规划时已经完成，对于展平式布局而言，Placement 的剩余任务主要是对标准单元的布局
+
+.. figure:: ./img/placement.JPG
+
+Placement is the process of placing standard cell in the design, The tool determines the location of each standard cell on the die.
+
+- place the standard cells available in the synthesized netlist
+- optimizes the design
+- determines the routability of design.
+
+Placement will be driven by different criteria like **timing driven** ,  **congestion driven** and  **power optimization**
+
+层次化布局
+-----------------
+
+布局算法
+-------------------
+
+Global Placement
+^^^^^^^^^^^^^^^^^^
+
+Detailed Placement
+^^^^^^^^^^^^^^^^^^
+
+布局方案评估
+-------------------
+
+在完成标准单元布局优化完成后，需要对设计进行拥堵分析、静态时序分析、噪声分析、电源分析来评估布局方案的质量
+
+
+标准单元布局优化算法
+------------------------

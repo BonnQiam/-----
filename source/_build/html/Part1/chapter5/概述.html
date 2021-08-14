@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Floorplanning 概述 &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../../genindex.html" />
+    <link rel="search" title="搜索" href="../../search.html" />
+    <link rel="next" title="布局I/O单元" href="%E5%B8%83%E5%B1%80IO%E5%8D%95%E5%85%83.html" />
+    <link rel="prev" title="Floorplanning" href="index.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="floorplanning">
+<h1>Floorplanning 概述<a class="headerlink" href="#floorplanning" title="永久链接至标题">¶</a></h1>
+<p>Floorplanning 是对芯片内部结构的完整规划与设计 —— Regardless of the physical design implementation style, after physical database creation using the imported netlist and corresponding library and technology files, the first step is <strong>Floorplanning</strong></p>
+<section id="objectives-of-floorplanning">
+<h2>Objectives of Floorplanning<a class="headerlink" href="#objectives-of-floorplanning" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>minimize the area</p></li>
+<li><p>minimize the Timing</p></li>
+<li><p>Reduce the wire length</p></li>
+<li><p>Making routing easy</p></li>
+<li><p>Reduce IR drop</p></li>
+</ul>
+</section>
+<section id="what-to-do-in-floorplanning">
+<h2>What to do in Floorplanning<a class="headerlink" href="#what-to-do-in-floorplanning" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>确定芯片面积：the size（width and height） of the core</p></li>
+<li><p>Macro / Block 的布局</p></li>
+<li><p>标准单元的排列形式</p>
+<ul>
+<li><p>the shape and placement of standard cell rows</p></li>
+<li><p>the shape and placement of routing channels</p></li>
+<li><p>standard cell placement constraints</p></li>
+</ul>
+</li>
+<li><p>I/O 单元的布局 + 电源规划：the placement of</p>
+<ul>
+<li><p>I/O cells</p></li>
+<li><p>power cells</p></li>
+<li><p>ground cells</p></li>
+<li><p>corner cells</p></li>
+<li><p>filler pad cells</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">VLSI物理设计方法学</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../chapter1/index.html">前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../chapter2/index.html">Library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Implementation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter4/index.html">Synthesize</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Floorplanning</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Floorplanning 概述</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#objectives-of-floorplanning">Objectives of Floorplanning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#what-to-do-in-floorplanning">What to do in Floorplanning</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="%E5%B8%83%E5%B1%80IO%E5%8D%95%E5%85%83.html">布局I/O单元</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%A1%AE%E5%AE%9A%E8%8A%AF%E7%89%87%E9%9D%A2%E7%A7%AF.html">确定芯片面积</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E5%B8%83%E5%B1%80Macro.html">布局Macro</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E5%B8%83%E5%B1%80Block.html">布局Block</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E7%94%B5%E6%BA%90%E8%A7%84%E5%88%92.html">电源规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E8%A7%84%E5%88%92.html">时钟规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Floorplanning%E7%9A%84%E8%AF%84%E4%BC%B0.html">Evaluate Floorplanning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#placement-routing">与布局（Placement）、布线（Routing）的关系</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../chapter8/index.html">Routing</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Implementation</a><ul>
+  <li><a href="index.html">Floorplanning</a><ul>
+      <li>Previous: <a href="index.html" title="上一章">Floorplanning</a></li>
+      <li>Next: <a href="%E5%B8%83%E5%B1%80IO%E5%8D%95%E5%85%83.html" title="下一章">布局I/O单元</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, QIAMKING.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../_sources/Part1/chapter5/概述.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

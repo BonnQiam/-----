@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>时序库文件 &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="单元库建立流程" href="%E5%8D%95%E5%85%83%E5%BA%93%E5%BB%BA%E7%AB%8B%E6%B5%81%E7%A8%8B.html" />
+    <link rel="prev" title="物理库交换格式(LEF)文件" href="%E7%89%A9%E7%90%86%E5%BA%93%E4%BA%A4%E6%8D%A2%E6%A0%BC%E5%BC%8F%28LEF%29%E6%96%87%E4%BB%B6.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>时序库文件<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<dl class="simple">
+<dt><strong>时序库</strong> ：</dt><dd><p>是描述单元库各个单元时序信息的主要库文件，定义了每个单元不同输入情况下各个输入端口到输出端口的传播延时</p>
+</dd>
+</dl>
+<p>工具通过仿真不同的工艺角（process corner condition）条件下电路的工作状态得到相应的时序数据，再将数据转换成工具可以识别的库交换文件用于芯片的时序分析</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>在建立时序库时，同时会关注时序库的应用条件，即 PVT 条件，常规情况下会考虑三种典型的工艺角条件下的晶体管中作情况</p>
+</div>
+<section id="id2">
+<h2>时序库的建立<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<figure class="align-default">
+<img alt="../_images/时序库的建立.png" src="../_images/时序库的建立.png" />
+</figure>
+<p>时序库文件与物理库 <cite>LEF</cite> 文件是相互配合的一对文件，其所含有的库单元是根据 <cite>LEF</cite> 所含有的信息，根据器件延时理论模型、SPICE网表进行仿真计算得来</p>
+</section>
+<section id="id3">
+<h2>时序库文件格式<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p><cite>liberty</cite> 是目前业界广泛使用的时序库文件格式（最早是由 Synopsys 公司开发定义），通常以 <cite>lib</cite> 定义作为扩展名</p></li>
+<li><p><cite>ILM</cite> 是 Synopsys 公司所开发，其时序关系简明准确地反映了接口边界的参数</p></li>
+</ul>
+<p>下具体介绍 <cite>liberty</cite> 的特征：</p>
+</section>
+<section id="id4">
+<h2>时序库中的线负载模型<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>时序库中的器件延时与其输入输出信号的转换时间、输出端口负载相关，其采用理想的统计值，并基于线负载模型予以表达</p>
+</section>
+<section id="id5">
+<h2>时序库单元信息<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>时序库中主要内容由单元信息完成，每个单元与物理库交换格式 <cite>LEF</cite> 文件中的单元一一对应，每个单元的信息包括：</p>
+<ul class="simple">
+<li><p>不同时序模型下的延时时间表、功耗数值表，表述数据为不同输出复杂、输入转换时间条件下的函数</p></li>
+<li><p>单元的特征，诸如其面积、静态功耗、端口名称</p></li>
+<li><p>端口的逻辑关系</p></li>
+<li><p>噪声</p></li>
+</ul>
+<p>P.S. 端口分别有输入、输出、双向三种类型，其中输入端口包括它的负载电容值</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">VLSI物理设计方法学</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter1/index.html">前言</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="%E5%8D%95%E5%85%83%E5%BA%93%E7%B1%BB%E5%88%AB.html">逻辑单元类别</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="%E5%8D%95%E5%85%83%E5%BA%93%E7%9B%B8%E5%85%B3%E7%9A%84%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E6%96%87%E4%BB%B6.html">与单元库相关的标准数据格式文件</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="%E7%89%A9%E7%90%86%E5%BA%93%E4%BA%A4%E6%8D%A2%E6%A0%BC%E5%BC%8F%28LEF%29%E6%96%87%E4%BB%B6.html">物理库交换格式(LEF)文件</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">时序库文件</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">时序库的建立</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">时序库文件格式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">时序库中的线负载模型</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">时序库单元信息</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8D%95%E5%85%83%E5%BA%93%E5%BB%BA%E7%AB%8B%E6%B5%81%E7%A8%8B.html">单元库建立流程</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter8/index.html">Routing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Library</a><ul>
+  <li><a href="%E5%8D%95%E5%85%83%E5%BA%93%E7%9B%B8%E5%85%B3%E7%9A%84%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E6%96%87%E4%BB%B6.html">与单元库相关的标准数据格式文件</a><ul>
+      <li>Previous: <a href="%E7%89%A9%E7%90%86%E5%BA%93%E4%BA%A4%E6%8D%A2%E6%A0%BC%E5%BC%8F%28LEF%29%E6%96%87%E4%BB%B6.html" title="上一章">物理库交换格式(LEF)文件</a></li>
+      <li>Next: <a href="%E5%8D%95%E5%85%83%E5%BA%93%E5%BB%BA%E7%AB%8B%E6%B5%81%E7%A8%8B.html" title="下一章">单元库建立流程</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, QIAMKING.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/chapter2/时序库文件.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

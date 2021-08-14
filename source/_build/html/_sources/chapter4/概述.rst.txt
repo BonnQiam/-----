@@ -1,0 +1,28 @@
+Floorplanning 概述
+===========================
+
+Floorplanning 是对芯片内部结构的完整规划与设计 —— Regardless of the physical design implementation style, after physical database creation using the imported netlist and corresponding library and technology files, the first step is **Floorplanning**
+
+Objectives of Floorplanning
+----------------------------------
+
+*   minimize the area
+*   minimize the Timing
+*   Reduce the wire length
+*   Making routing easy
+*   Reduce IR drop
+
+What to do in Floorplanning
+----------------------------------
+
+- 确定芯片面积：the size（width and height） of the core; 
+- the shape and placement of standard cell rows
+- the shape and placement of routing channels
+- standard cell placement constraints
+- the placement of 
+  
+  - I/O cells
+  - power cells
+  - ground cells
+  - corner cells
+  - filler pad cells

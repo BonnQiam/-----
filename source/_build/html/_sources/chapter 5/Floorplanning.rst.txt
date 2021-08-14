@@ -1,0 +1,361 @@
+Floorplanning
+==============================
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Contents:
+
+Floorplanning 是对芯片内部结构的完整规划与设计 —— Regardless of the physical design implementation style, after physical
+database creation using the imported netlist and corresponding library and
+technology files, the first step is **Floorplanning**
+
+Objectives of Floorplanning
+----------------------------------
+
+*   minimize the area
+*   minimize the Timing
+*   Reduce the wire length
+*   Making routing easy
+*   Reduce IR drop
+
+What to do in Floorplanning
+----------------------------------
+
+- 确定芯片面积：the size（width and height） of the core; 
+- the shape and placement of standard cell rows
+- the shape and placement of routing channels
+- standard cell placement constraints
+- the placement of 
+  
+  - I/O cells
+  - power cells
+  - ground cells
+  - corner cells
+  - filler pad cells
+
+.. note::
+    在正式开始 Floorplanning 之前，还有两项预备工作，分别是 
+    
+    （1） `Connecting Power and Ground Ports` ：create logical connections between power
+    and ground pins on standard cells and macros and the power and ground nets in the design
+    
+    （2） `Adding Power, Ground, and Corner Cells`：Physical-only cells for power, ground, and corner placement might not be part of the
+    synthesized netlist and must be added to design.
+
+
+I/O 单元的放置
+^^^^^^^^^^^^^^^^^^
+  
+It is critical to functional operation of an ASIC design to insure:
+
+- the pads have adequate power and ground connections
+- the pads are placed properly
+
+目的：eliminate electromigration and current-switching noise related problems.
+
+
+设置 I/O Pad Cell 约束
+""""""""""""""""""""""""
+
+以 ICC 为例，在 initializing the floorplan 之前，首先为 I/O pad cells 设置约束：
+
+.. code-block:: console
+    :linenos:
+
+    $ set_pad_physical_constraints
+
+约束内容为指定 the pad cell ordering, orientation, placement side, offset from die edge, and pad-to-pad spacing for each I/O pad 
+
+.. note::
+    上述工作即为设置管脚约束的 `tdf` 文件了，它指定了每个 IO cell 在整个芯片中的位置和排列顺序 —— 对于 Chip level 的设计而言，该文件主要用来定义设计中所有 IO 以及 IO Corner 的位置（上下左右的方位以及排列顺序，也可以定义具体的坐标）
+
+    如果是 Block Level的设计而言，因为设计中没有IO cell，所以可以读入pin顺序和位置的 `tdf` 文件 —— 对于Block level的设计而言，它用来指定所有pin的位置和所用的metal的层次。
+
+之后在执行
+
+.. code-block:: console
+    :linenos:
+
+    $ initialize_floorplan
+
+在读入管脚约束文件（ `.tdf` 文件）后，可以创建Floorplan得到芯片大概的物理形状和尺寸，在这一步执行完毕之后，IO pad cell 或者 pin 就会按照前面的约束进行摆放。
+
+P.S. The *`initialize_floorplan`* command places constrained pads first. Any unconstrained pads are placed next, using any available pad location. The tool does not place unconstrained pads between consecutively ordered constrained pads
+
+.. figure:: ./img/pad_placement.png
+
+
+确定芯片面积 / 布局规划控制
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+对芯片面积大小(die size)进行确定，主要基于两个方面进行考虑：
+    - 成本：面积越小，单张 wafer 的产出的裸片（die）数量增加，芯片的平均成本下降
+    - 布线质量：设定的裸片面积过小，造成布线堵塞（routing congestion），造成长周期的设计迭代
+  
+一个合理的面积设定是在保证布线同时尽量节约产品成本
+
+芯片面积的确定体现在布局规划方案所使用的 Floorplan Control Parameters上
+
+Aspect ratio
+""""""""""""""""""""
+
+Aspect ratio is the ratio between vertical routing resources to horizontal routing resources. 
+
+.. math::
+    :label: math-single
+
+    \text{Aspect Ratio}(Ar) = \frac{\text{Horizontal routing resource} (H)}{\text{Vertical routing resource} (V)}
+
+
+Aspect ratio 指定芯片高度和宽度比值的方案 —— If you specify a ratio of 1.00, the height and width are the same and therefore the core is a square; If you specify a ratio of 3.00, the height is three times the width.
+
+.. note::
+    当设计中不含Macro时可以采用 Aspect ratio 布图规划控制参数进行试探，在最开始Trail的时候一般设置较小的利用率，看 Timing、DRC、LVS等结果如何，此时用时较短，能在短时间内给设计者一个参考，让设计者对 Floorplan 方案进行评估。如果设计的问题不大，那么可以逐渐提高利用率，减小芯片的面积。
+
+Width and Height
+""""""""""""""""""""
+指定高度和宽度，一般对于含有Macro的设计，多用这种方案
+
+评估指标
+""""""""""""""""""""
+
+Core Utilization (Cu)
+**************************
+
+Core Utilization (`Cu`) indicates the amount of core area used for cell placement. 
+
+The number is calculated as a ratio of the total cell area (for hard macros and standard cells or soft macro cells) to the core area. 
+
+.. math::
+    :label: math-single
+
+    \text{Core Utilization(Cu)} =\frac{\text{ Standard Cell area}}{\text{Row area + Channel area}}
+
+A core utilization of 0.8, for example, means that 80% of the core area is used for cell placement and 20 percent is available for routing.
+
+
+Row to Core Ratio (Rcr):
+**************************
+
+
+Row to Core Ratio (`Rcr`) indicates the amount of channel space to provide for routing between the cell rows. 
+
+The smaller the number, the more space is left for routing. A value of 1.0 leaves no routing channel space.
+
+.. math::
+    :label: math-single
+    
+    \text{Rcr} = \frac{\text{Row area}}{\text{Core area (H * V)}}
+
+Total utilization T(F)
+**************************
+
+*Total utilization* `T(F)` of floorplan F is derived using the following equation:
+
+..  math::
+    :label: math-single
+
+    T(F) =\frac{A(m) + A(p) + A(s)}{A}
+
+
+
+-  `A(m)` ： Area occupied by macros
+-  `A(p)` ： Area occupied by Pads/ Pad fillers
+-  `A(s)` ： Area occupied by Standard Cells 
+
+Cell row utilization 
+**************************
+Cell row utilization `C(F)` of floorplan F is approximated using the following equation:
+
+.. math::
+    :label: math-single
+    
+    C(F) = \frac{A(s)}{A(R -\text{union}(B, E, m, p))}
+    
+-  `R` = All cell rows
+-  `B` = All placement blockages
+-  `E` = Exclusive Regions
+
+Block / Macro的放置
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+若采用展平式物理设计方案，则设计中仅仅由 Macro 和标准单元构成；若采用层次化物理设计方案，则经过 Partitioning 后，顶层设计主要由 Macro、sub-system级别的 Block 构成
+
+在 Floorplan 阶段，对于前者主要是考虑 Macro 的放置，后者则是要考虑 Macro、Block 的放置
+
+.. note::
+    Before staring of Floorplan, it is better to have **basic design understanding** , data flow of the design, integration guidelines of any special analog hard IPs in the design. And for block/partition level designs understanding the placement & IO interactions of the block in Full chip will help in coming up with good floorplan.
+
+Macro / Block 的放置显著依赖于设计者的经验，摆放它们时要考虑面积、互连线长等传统问题，还需要考虑Macro / Block 的摆放对于 Place 的影响
+
+(Macro) Floorplan Techniques
+""""""""""""""""""""""""""""""""""""""""
+
+.. figure:: ./img/floorplantechniques.png
+
+*   Abutted floorplan : Channel less placement of blocks.
+*   Non-Abutted / Channeled floorplan  : Channel based placement of blocks.
+*   Mix / Narrow-Channel floorplan : partially abutted with some channels.
+
+
+Macro 放置原则：边缘摆放
+""""""""""""""""""""""""""""""""""""""""
+
+边缘摆放的出发动机主要来源于下面两点：
+    1. 从目前芯片设计的趋势来看，芯片中除了计算单元外就是随机存储单元RAM、只读存储单元ROM等。这些存储单元占据的芯片面积在有些设计中甚至超过百分之五十
+   
+       1. 对于存储单元来说，存在数据端口和存储端口，并且周围需要有一些可测性电路。这使得这些单元引线众多且功耗巨大
+       2. 将它们*贴边放置*，不仅有利于这些单元的供电，而且防止这些单元过多的引脚对其他单元的布线造成影响。
+
+    2. 标准单元在布局时，按照Row所划定的高度一排一排的摆放
+   
+       1. 既有利于算法的设计，又有利于工业制造。
+       2. 在给各个器件供电时，可以使用横向的电源线将处于同一高度的器件连接在一起统一供电
+    
+    3. 将标准单元都摆放在芯片区域的中心，而大的Macro摆放在四周，就可以使标准单元方便的只用一条电源线连接在一起，而不会被高度不统一的Macro打断。对电源网格的设计提供了巨大便利 
+
+Macro的摆放原则基本如下，可以参照下面这张图
+
+.. figure:: ./img/test.png
+
+1）Macro 尽量摆放在靠近相应输入输出口（IO pad cell）的位置
+
+一般来说对于大型的Macro，他们不仅仅需要与芯片内部的其他Macro或者标准单元进行数据交换，还需要与芯片外部的器件进行通信。
+
+比如，锁相环单元需要接收外部晶振信号，存储单元需要接收外部地址等。这种数据交换就是靠 IO pad cell 进行的，因此摆放在离相应的数据端口附近，有利于减少互联线长度，减少线上延迟，并节约布线资源。
+
+2）大的Macro摆放尽量贴近版图的边缘和角落，这样有利于空间的利用，要尽量留出一个连续且尽量接近圆形/方形的Core区域来摆放标准单元。
+
+3）Macro与Macro之间要留有一定空隙，给予布线资源。
+
+特别是在Macro的间隙有端口的时候更是如此，设计者可以通过相邻Marco边界上端口的多少来决定留有多大的间隙比较合适，这样才不至于出现Pin Access的问题
+
+4）合理设置Macro摆放的角度。在考量Macro摆放的角度时，不仅仅考虑空间摆放的因素，还要根据端口的连接关系与互连Macro的位置来决定。
+
+如前面原理图中存储Macro的端口方向朝向中央，因为中间的标准单元需要与存储Macro进行数据交换，存在互连关系。在实际设计时，不仅要根据端口与标准单元之间的连接关系，还要考虑Macro与Macro之间的互连关系进行综合判断。
+
+
+手工对宏单元进行摆放后，需要将他们设置为dont_touch属性，以防止在布局阶段软件对它进行移动。命令为：
+
+.. code-block:: console
+    :linenos:
+    
+    set_dont_touch_placement[all_macro_cells]
+
+Halo
+""""""""""""""""""""""""""""""""""""""""
+
+在使用EDA软件的Floorplan设计时，同样可以给 Macro加上 **晕环** （ `halo` ）来控制 Macro 与 Macro 之间的距离 —— 设置不允许摆放标准单元晕道的目的是为了能够提供专用的布线空间
+
+.. figure:: ./img/halo.jpg
+
+.. note::
+    在ICC中这被称为 `Keepout Margin`，有 `hard` 、 `soft` 之分:
+    
+    (1)hard区域不允许任何Cell放置在该区域
+    (2)soft则在coarse place的时候不允许任何Cell放入其内，但是在optimization以及legalization的时候是允许Cell放入其内的，也就是只允许Buffer加入其中
+    
+    Keepout Margin与Placement Blockage不同，它并不是独立存在的，而是依附于Macro周围，可随Macro移动的。所以它是专门用来控制Macro和其他单元之间距离的一种功能。
+
+在基于标准单元的设计中，标准单元在布局（place）阶段完成了整个芯片内部的摆放，由于标准单元占据了底层金属的绝大多数布线轨道，当芯片局部出现拥塞时，布线晕道就能够提供更多底层的布线通道
+
+布局障碍
+""""""""""""""""""""""""""""""""""""""""
+
+`blockages` :
+    are specific location where placing of cells are blocked, acts like guidelines for placement of std cells.  
+
+blockages will not be guiding the tool to place the std cells at some particular area, but it won't allow the tool to place the std cell in the blocked area
+
+.. note::
+    在 Placement、Routing 阶段都存在 Blockage，均有如下分类
+    
+    1）Hard Blockages
+    
+    2）Soft Blockages
+    
+    3）Partial Blockages
+
+    
+
+* Hard Blockage
+
+  *   Complete Standard Cell Blockage
+  *   std cell blockages are mostly used to
+  
+      *   avoid routing congestion at macro corners
+      *   Restrict std cells to certain regions in the design
+      *   control power rail generation at macro cells
+
+* Soft Blockage
+
+  *   Non-Buffering Blockage, only buffers can be placed and std cells cannot be placed
+
+* Partial Blockage
+
+  *   Partial Standard Cell Blockage and is used to avoid congestion
+  *   We can Block Standard Cells as per the required percentage value
+
+fly lines
+""""""""""""""""""""""""""""""""""""""""
+
+
+Block 的放置
+""""""""""""""""""""""""""""""""""""""""
+
+在层次化设计中，对于对于各个预计分割的区域之间也需要进行布线通道的定义。布线通道的宽度需要考虑模块布局的拓扑约束，诸如：
+
+- 子模块到子模块的界限
+- 子模块之间的距离、顺序、排列
+- 子模块之间的表面比率、网络权重、子模块隔离区
+
+该部分请参考 Placement 部分
+
+电源网络的规划
+^^^^^^^^^^^^^^^^^^
+
+手动规划时钟网络
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Although most ASIC designs use clock tree synthesis, clock tree synthesis
+may not be sufficient for very high-performance and synchronized designs.
+
+In this case, one needs to implement the distributed clock networks manually
+in order to minimize the skew between communicating elements due to their
+line resistance and capacitance.
+
+.. note::
+    注意：Floorplanning阶段的时钟网络分布与常规的时钟树综合，其依赖于手动布图规划
+
+How to evaluate Floorplanning
+----------------------------------
+
+在布图规划、布局中需要多次迭代分析，从而实现最佳效果
+
+布局规划阶段的延迟预估
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+Macro布放与布线通道的关系
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Macro布放的结果会对前期布图规划的期望目标产生直接影响，其中 **能够保证布线的完成是通过布线通道的分析来进行**
+
+.. note::
+    介绍相关概念：
+
+    （1）布线轨道（routing track）：芯片内部专门用于布线的路径
+
+    （2）布线通道（routing channel）：每两条 / 多条布线轨道的空间
+
+先前介绍的晕道，实现了预留底层布线通道，解决了当前局部拥塞的问题，但是也会产生其他区域的拥塞问题
+
+与布局（Placement）、布线（Routing）的关系
+-------------------------------------------
+
+Marco、I/O pad cell 、Block 的布放在结果上属于布局，但是其又在布局规划阶段完成，由于其占据的面积（空间）很大，只有 Marco、I/O pad cell 的布放完成后，电源规划才有意义
+
+Block / Macro 自动放置的算法推进
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+现代 Soc 设计可以包含数百或更多个 Block，此时就必须借助 EDA 工具来实现 Block 的自动布局

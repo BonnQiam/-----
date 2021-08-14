@@ -1,0 +1,12 @@
+时钟规划
+=========================
+
+Although most ASIC designs use clock tree synthesis, clock tree synthesis
+may not be sufficient for very high-performance and synchronized designs.
+
+In this case, one needs to implement the distributed clock networks manually
+in order to minimize the skew between communicating elements due to their
+line resistance and capacitance.
+
+.. note::
+    注意：Floorplanning阶段的时钟网络分布与常规的时钟树综合，其依赖于手动布图规划

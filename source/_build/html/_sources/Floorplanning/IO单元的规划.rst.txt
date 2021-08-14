@@ -1,0 +1,6 @@
+It is critical to functional operation of an ASIC design to insure:
+
+- the pads have adequate power and ground connections
+- the pads are placed properly
+
+📌 目的：eliminate electromigration and current-switching noise related problems.

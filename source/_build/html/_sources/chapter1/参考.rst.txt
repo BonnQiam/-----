@@ -1,0 +1,8 @@
+参考
+-------------
+
+- 陈春章, 艾霞, and 王国雄. 数字集成电路物理设计. 科学出版社, 2008.
+- Golshan, Khosrow. Physical Design Essentials. Springer Science+ Business Media, LLC, 2007.
+- IC Compiler Design Planning User Guide Version E-2010.12-SP2, March 2011
+- https://www.vlsi-backend-adventure.com/floorplan.html#8
+- https://lmr.fi/int/physical-design-pd-interview-questions-floorplanning/

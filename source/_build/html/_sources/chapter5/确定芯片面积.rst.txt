@@ -1,0 +1,91 @@
+确定芯片面积
+====================
+
+对芯片面积大小(die size)进行确定，主要基于两个方面进行考虑：
+    - 成本：面积越小，单张 wafer 的产出的裸片（die）数量增加，芯片的平均成本下降
+    - 布线质量：设定的裸片面积过小，造成布线堵塞（routing congestion），造成长周期的设计迭代
+  
+一个合理的面积设定是在保证布线同时尽量节约产品成本
+
+芯片面积的确定体现在布局规划方案所使用的 Floorplan Control Parameters上，主流上有如下两种方式
+
+Aspect ratio
+-------------------
+
+Aspect ratio is the ratio between vertical routing resources to horizontal routing resources. 
+
+.. math::
+    :label: math-single
+
+    \text{Aspect Ratio}(Ar) = \frac{\text{Horizontal routing resource} (H)}{\text{Vertical routing resource} (V)}
+
+
+Aspect ratio 指定芯片高度和宽度比值的方案 —— If you specify a ratio of 1.00, the height and width are the same and therefore the core is a square; If you specify a ratio of 3.00, the height is three times the width.
+
+.. note::
+    当设计中不含Macro时可以采用 Aspect ratio 布图规划控制参数进行试探，在最开始Trail的时候一般设置较小的利用率，看 Timing、DRC、LVS等结果如何，此时用时较短，能在短时间内给设计者一个参考，让设计者对 Floorplan 方案进行评估。如果设计的问题不大，那么可以逐渐提高利用率，减小芯片的面积。
+
+Width and Height
+-------------------
+指定高度和宽度，一般对于含有Macro的设计，多用这种方案
+
+
+评估指标
+--------------------------
+
+Core Utilization (Cu)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Core Utilization (`Cu`) indicates the amount of core area used for cell placement. 
+
+The number is calculated as a ratio of the total cell area (for hard macros and standard cells or soft macro cells) to the core area. 
+
+.. math::
+    :label: math-single
+
+    \text{Core Utilization(Cu)} =\frac{\text{ Standard Cell area}}{\text{Row area + Channel area}}
+
+A core utilization of 0.8, for example, means that 80% of the core area is used for cell placement and 20 percent is available for routing.
+
+
+Row to Core Ratio (Rcr):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Row to Core Ratio (`Rcr`) indicates the amount of channel space to provide for routing between the cell rows. 
+
+The smaller the number, the more space is left for routing. A value of 1.0 leaves no routing channel space.
+
+.. math::
+    :label: math-single
+    
+    \text{Rcr} = \frac{\text{Row area}}{\text{Core area (H * V)}}
+
+Total utilization T(F)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+*Total utilization* `T(F)` of floorplan F is derived using the following equation:
+
+..  math::
+    :label: math-single
+
+    T(F) =\frac{A(m) + A(p) + A(s)}{A}
+
+
+
+-  `A(m)` ： Area occupied by macros
+-  `A(p)` ： Area occupied by Pads/ Pad fillers
+-  `A(s)` ： Area occupied by Standard Cells 
+
+Cell row utilization 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Cell row utilization `C(F)` of floorplan F is approximated using the following equation:
+
+.. math::
+    :label: math-single
+    
+    C(F) = \frac{A(s)}{A(R -\text{union}(B, E, m, p))}
+    
+-  `R` = All cell rows
+-  `B` = All placement blockages
+-  `E` = Exclusive Regions

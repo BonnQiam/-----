@@ -1,0 +1,32 @@
+Placement阶段的设计约束
+================================
+
+一般在电源地 Strap 下面放置标准单元时，可能会在Strap 的地方存在 Congestion，因此这时可以限制工具在电源地 Srtap 下面少放或者不放置标准单元，相关设置命令如下：
+
+例如，将TM1和TM2的PG线下方设置为 **Partial Blockage** ：
+
+.. code-block:: console
+    :linenos:
+    
+    $ set_pnet_options-partial {TM1 TM2}
+
+不允许 TM1 和 TM2 的 PG 线下方放置任何标准单元：
+
+.. code-block:: console
+    :linenos:
+    
+    $ set_pnet_options-complete { TM1 TM2}
+
+允许软件在TM1和TM2的PG线下方放置任何标准单元，在不指定的情况下，软件默认的也是该设置，即允许软件在所有的PG线下方自由放置任何标准单元的
+
+.. code-block:: console
+    :linenos:
+    
+    $ set_pnet_options-none {TM1 TM2}
+
+在设置好约束之后即可以进行布局
+
+.. code-block:: console
+    :linenos:
+    
+    $ place_opt -effort high-congestion

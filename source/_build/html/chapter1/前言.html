@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>前言 &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>前言<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<section id="id2">
+<h2>基本概念<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<section id="id3">
+<h3>工艺角<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<dl class="simple">
+<dt>最常用的工艺角为：</dt><dd><ul class="simple">
+<li><p>最佳 / 最快 – BC / best case / fast</p></li>
+<li><p>典型 / 正常 – TC / typical case / normal</p></li>
+<li><p>最差 / 最满 – WC / worst case / slow</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="pvt">
+<h3>PVT条件<a class="headerlink" href="#pvt" title="永久链接至标题">¶</a></h3>
+<p>process（工艺）、temperature（温度）、voltage（电压）</p>
+</section>
+<section id="pdk">
+<h3>PDK<a class="headerlink" href="#pdk" title="永久链接至标题">¶</a></h3>
+<p>PDK（process design kit） 主要包括技术文件（technology file）、器件模型、原理图符号（schematic symbol）、参数单元（P-Cell）、验证文件集（DRC/LVS/EXT）</p>
+</section>
+<section id="id4">
+<h3>器件延时理论模型<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<section id="id5">
+<h4>线负载模型<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h4>
+<p><strong>器件延时</strong> ：</p>
+</section>
+</section>
+</section>
+<section id="id6">
+<h2>时钟信号<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<p>系统时钟、全局时钟的概念</p>
+<section id="id7">
+<h3>时钟信号的生成<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id8">
+<h3>时钟信号的特性<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<section id="id9">
+<h4>时钟信号的定义<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="latency">
+<h4>时钟信号的延滞（latency）<a class="headerlink" href="#latency" title="永久链接至标题">¶</a></h4>
+<p>时钟信号的延滞（latency），又被称为插入延迟（insertion delay），包括两部分：</p>
+<ul class="simple">
+<li><p>时钟源插入延迟：来自时钟源到当前芯片时钟根节点之间的延迟</p></li>
+<li><p>时钟网络插入延迟：时钟树的延迟</p></li>
+</ul>
+</section>
+<section id="id10">
+<h4>时钟信号的抖动<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h4>
+<p>时钟信号本身的抖动（jitter）定义为信号时间与理想时间时间的偏差（deviation），又称时钟抖动为 uncertainty ，即为不确定性</p>
+</section>
+<section id="id11">
+<h4>时钟信号的偏差<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h4>
+<p>同一时钟信号从时钟根到达任意两个寄存器的延迟（delay）之差称为偏差（skew）</p>
+</section>
+</section>
+</section>
+<section id="id12">
+<h2>参考<a class="headerlink" href="#id12" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>陈春章, 艾霞, and 王国雄. 数字集成电路物理设计. 科学出版社, 2008.</p></li>
+<li><p>Golshan, Khosrow. Physical Design Essentials. Springer Science+ Business Media, LLC, 2007.</p></li>
+<li><p>IC Compiler Design Planning User Guide Version E-2010.12-SP2, March 2011</p></li>
+<li><p><a class="reference external" href="https://www.vlsi-backend-adventure.com/floorplan.html#8">https://www.vlsi-backend-adventure.com/floorplan.html#8</a></p></li>
+<li><p><a class="reference external" href="https://lmr.fi/int/physical-design-pd-interview-questions-floorplanning/">https://lmr.fi/int/physical-design-pd-interview-questions-floorplanning/</a></p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">VLSI物理设计方法学</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">前言</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, QIAMKING.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/chapter1/前言.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

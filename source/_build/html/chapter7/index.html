@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>CTS &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Terminology" href="Terminology.html" />
+    <link rel="prev" title="层次化布局" href="../chapter6/%E5%B1%82%E6%AC%A1%E5%8C%96%E5%B8%83%E5%B1%80.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="cts">
+<h1>CTS<a class="headerlink" href="#cts" title="永久链接至标题">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Terminology.html">Terminology</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E6%A0%91%E7%BB%93%E6%9E%84.html">时钟树结构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E6%A0%91%E7%BA%A6%E6%9D%9F%E6%96%87%E4%BB%B6.html">时钟树约束文件</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E6%A0%91%E7%BB%BC%E5%90%88%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%AE%97%E6%B3%95.html">时钟树综合过程及算法</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E6%A0%91%E5%AF%B9%E7%94%B5%E8%B7%AF%E6%80%A7%E8%83%BD%EF%BC%88%E5%8A%9F%E8%83%BD%EF%BC%89%E7%9A%84%E5%BD%B1%E5%93%8D.html">时钟树对电路性能（功能）的影响</a></li>
+</ul>
+</div>
+<p>从布图规划开始，到电源规划到完成布局之后要提供好的数据环境，供时钟树综合使用</p>
+<ul class="simple">
+<li><p>物理库、时序库、设计数据、约束参数</p></li>
+<li><p>能够建立时钟树的特殊内容，例如时钟信号和特点、 时钟树的特诊和类型、时钟树约束参数</p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">VLSI物理设计方法学</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter1/index.html">前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CTS</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Terminology.html">Terminology</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E6%A0%91%E7%BB%93%E6%9E%84.html">时钟树结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E6%A0%91%E7%BA%A6%E6%9D%9F%E6%96%87%E4%BB%B6.html">时钟树约束文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E6%A0%91%E7%BB%BC%E5%90%88%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%AE%97%E6%B3%95.html">时钟树综合过程及算法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E6%A0%91%E5%AF%B9%E7%94%B5%E8%B7%AF%E6%80%A7%E8%83%BD%EF%BC%88%E5%8A%9F%E8%83%BD%EF%BC%89%E7%9A%84%E5%BD%B1%E5%93%8D.html">时钟树对电路性能（功能）的影响</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter8/index.html">Routing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../chapter6/%E5%B1%82%E6%AC%A1%E5%8C%96%E5%B8%83%E5%B1%80.html" title="上一章">层次化布局</a></li>
+      <li>Next: <a href="Terminology.html" title="下一章">Terminology</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, QIAMKING.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/chapter7/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>时钟信号 &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>时钟信号<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>系统时钟、全局时钟的概念</p>
+<section id="id2">
+<h2>时钟信号的生成<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+</section>
+<section id="id3">
+<h2>时钟信号的特性<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<section id="id4">
+<h3>时钟信号的定义<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="latency">
+<h3>时钟信号的延滞（latency）<a class="headerlink" href="#latency" title="永久链接至标题">¶</a></h3>
+<p>时钟信号的延滞（latency），又被称为插入延迟（insertion delay），包括两部分：</p>
+<ul class="simple">
+<li><p>时钟源插入延迟：来自时钟源到当前芯片时钟根节点之间的延迟</p></li>
+<li><p>时钟网络插入延迟：时钟树的延迟</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>时钟信号的抖动<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>时钟信号本身的抖动（jitter）定义为信号时间与理想时间时间的偏差（deviation），又称时钟抖动为 uncertainty ，即为不确定性</p>
+</section>
+<section id="id6">
+<h3>时钟信号的偏差<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>同一时钟信号从时钟根到达任意两个寄存器的延迟（delay）之差称为偏差（skew）</p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">VLSI物理设计方法学</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, QIAMKING.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/chapter 1/时钟信号.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

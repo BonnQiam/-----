@@ -1,0 +1,9 @@
+Partitioning & Design Flow
+======================================
+
+.. toctree::
+   :maxdepth: 4
+   :caption: Contents:
+
+    ./Partitioning.rst
+    ./Flow.rst

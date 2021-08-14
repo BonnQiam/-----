@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Floorplanning &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="floorplanning">
+<h1>Floorplanning<a class="headerlink" href="#floorplanning" title="永久链接至标题">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Floorplanning 是对芯片内部结构的完整规划与设计 —— Regardless of the physical design implementation style, after physical
+database creation using the imported netlist and corresponding library and
+technology files, the first step is <strong>Floorplanning</strong></p>
+<section id="objectives-of-floorplanning">
+<h2>Objectives of Floorplanning<a class="headerlink" href="#objectives-of-floorplanning" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>minimize the area</p></li>
+<li><p>minimize the Timing</p></li>
+<li><p>Reduce the wire length</p></li>
+<li><p>Making routing easy</p></li>
+<li><p>Reduce IR drop</p></li>
+</ul>
+</section>
+<section id="what-to-do-in-floorplanning">
+<h2>What to do in Floorplanning<a class="headerlink" href="#what-to-do-in-floorplanning" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p>确定芯片面积：the size（width and height） of the core;</p></li>
+<li><p>the shape and placement of standard cell rows</p></li>
+<li><p>the shape and placement of routing channels</p></li>
+<li><p>standard cell placement constraints</p></li>
+<li><p>the placement of</p>
+<ul>
+<li><p>I/O cells</p></li>
+<li><p>power cells</p></li>
+<li><p>ground cells</p></li>
+<li><p>corner cells</p></li>
+<li><p>filler pad cells</p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>在正式开始 Floorplanning 之前，还有两项预备工作，分别是</p>
+<p>（1） <cite>Connecting Power and Ground Ports</cite> ：create logical connections between power
+and ground pins on standard cells and macros and the power and ground nets in the design</p>
+<p>（2） <cite>Adding Power, Ground, and Corner Cells</cite>：Physical-only cells for power, ground, and corner placement might not be part of the
+synthesized netlist and must be added to design.</p>
+</div>
+<section id="i-o">
+<h3>I/O 单元的放置<a class="headerlink" href="#i-o" title="永久链接至标题">¶</a></h3>
+<p>It is critical to functional operation of an ASIC design to insure:</p>
+<ul class="simple">
+<li><p>the pads have adequate power and ground connections</p></li>
+<li><p>the pads are placed properly</p></li>
+</ul>
+<p>目的：eliminate electromigration and current-switching noise related problems.</p>
+<section id="i-o-pad-cell">
+<h4>设置 I/O Pad Cell 约束<a class="headerlink" href="#i-o-pad-cell" title="永久链接至标题">¶</a></h4>
+<p>以 ICC 为例，在 initializing the floorplan 之前，首先为 I/O pad cells 设置约束：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">$ </span>set_pad_physical_constraints
+</pre></div>
+</div>
+<p>约束内容为指定 the pad cell ordering, orientation, placement side, offset from die edge, and pad-to-pad spacing for each I/O pad</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>上述工作即为设置管脚约束的 <cite>tdf</cite> 文件了，它指定了每个 IO cell 在整个芯片中的位置和排列顺序 —— 对于 Chip level 的设计而言，该文件主要用来定义设计中所有 IO 以及 IO Corner 的位置（上下左右的方位以及排列顺序，也可以定义具体的坐标）</p>
+<p>如果是 Block Level的设计而言，因为设计中没有IO cell，所以可以读入pin顺序和位置的 <cite>tdf</cite> 文件 —— 对于Block level的设计而言，它用来指定所有pin的位置和所用的metal的层次。</p>
+</div>
+<p>之后在执行</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">$ </span>initialize_floorplan
+</pre></div>
+</div>
+<p>在读入管脚约束文件（ <cite>.tdf</cite> 文件）后，可以创建Floorplan得到芯片大概的物理形状和尺寸，在这一步执行完毕之后，IO pad cell 或者 pin 就会按照前面的约束进行摆放。</p>
+<p>P.S. The <em>`initialize_floorplan`</em> command places constrained pads first. Any unconstrained pads are placed next, using any available pad location. The tool does not place unconstrained pads between consecutively ordered constrained pads</p>
+<figure class="align-default">
+<img alt="chapter 5/img/pad_placement.png" src="chapter 5/img/pad_placement.png" />
+</figure>
+</section>
+</section>
+<section id="id1">
+<h3>确定芯片面积 / 布局规划控制<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<dl class="simple">
+<dt>对芯片面积大小(die size)进行确定，主要基于两个方面进行考虑：</dt><dd><ul class="simple">
+<li><p>成本：面积越小，单张 wafer 的产出的裸片（die）数量增加，芯片的平均成本下降</p></li>
+<li><p>布线质量：设定的裸片面积过小，造成布线堵塞（routing congestion），造成长周期的设计迭代</p></li>
+</ul>
+</dd>
+</dl>
+<p>一个合理的面积设定是在保证布线同时尽量节约产品成本</p>
+<p>芯片面积的确定体现在布局规划方案所使用的 Floorplan Control Parameters上</p>
+<section id="aspect-ratio">
+<h4>Aspect ratio<a class="headerlink" href="#aspect-ratio" title="永久链接至标题">¶</a></h4>
+<p>Aspect ratio is the ratio between vertical routing resources to horizontal routing resources.</p>
+<div class="math notranslate nohighlight" id="equation-math-single">
+<span class="eqno">(1)<a class="headerlink" href="#equation-math-single" title="公式的永久链接">¶</a></span>\[\text{Aspect Ratio}(Ar) = \frac{\text{Horizontal routing resource} (H)}{\text{Vertical routing resource} (V)}\]</div>
+<p>Aspect ratio 指定芯片高度和宽度比值的方案 —— If you specify a ratio of 1.00, the height and width are the same and therefore the core is a square; If you specify a ratio of 3.00, the height is three times the width.</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>当设计中不含Macro时可以采用 Aspect ratio 布图规划控制参数进行试探，在最开始Trail的时候一般设置较小的利用率，看 Timing、DRC、LVS等结果如何，此时用时较短，能在短时间内给设计者一个参考，让设计者对 Floorplan 方案进行评估。如果设计的问题不大，那么可以逐渐提高利用率，减小芯片的面积。</p>
+</div>
+</section>
+<section id="width-and-height">
+<h4>Width and Height<a class="headerlink" href="#width-and-height" title="永久链接至标题">¶</a></h4>
+<p>指定高度和宽度，一般对于含有Macro的设计，多用这种方案</p>
+</section>
+<section id="id2">
+<h4>评估指标<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h4>
+<section id="core-utilization-cu">
+<h5>Core Utilization (Cu)<a class="headerlink" href="#core-utilization-cu" title="永久链接至标题">¶</a></h5>
+<p>Core Utilization (<cite>Cu</cite>) indicates the amount of core area used for cell placement.</p>
+<p>The number is calculated as a ratio of the total cell area (for hard macros and standard cells or soft macro cells) to the core area.</p>
+<div class="math notranslate nohighlight" id="equation-math-single">
+<span class="eqno">(2)<a class="headerlink" href="#equation-math-single" title="公式的永久链接">¶</a></span>\[\text{Core Utilization(Cu)} =\frac{\text{ Standard Cell area}}{\text{Row area + Channel area}}\]</div>
+<p>A core utilization of 0.8, for example, means that 80% of the core area is used for cell placement and 20 percent is available for routing.</p>
+</section>
+<section id="row-to-core-ratio-rcr">
+<h5>Row to Core Ratio (Rcr):<a class="headerlink" href="#row-to-core-ratio-rcr" title="永久链接至标题">¶</a></h5>
+<p>Row to Core Ratio (<cite>Rcr</cite>) indicates the amount of channel space to provide for routing between the cell rows.</p>
+<p>The smaller the number, the more space is left for routing. A value of 1.0 leaves no routing channel space.</p>
+<div class="math notranslate nohighlight" id="equation-math-single">
+<span class="eqno">(3)<a class="headerlink" href="#equation-math-single" title="公式的永久链接">¶</a></span>\[\text{Rcr} = \frac{\text{Row area}}{\text{Core area (H * V)}}\]</div>
+</section>
+<section id="total-utilization-t-f">
+<h5>Total utilization T(F)<a class="headerlink" href="#total-utilization-t-f" title="永久链接至标题">¶</a></h5>
+<p><em>Total utilization</em> <cite>T(F)</cite> of floorplan F is derived using the following equation:</p>
+<div class="math notranslate nohighlight" id="equation-math-single">
+<span class="eqno">(4)<a class="headerlink" href="#equation-math-single" title="公式的永久链接">¶</a></span>\[T(F) =\frac{A(m) + A(p) + A(s)}{A}\]</div>
+<ul class="simple">
+<li><p><cite>A(m)</cite> ： Area occupied by macros</p></li>
+<li><p><cite>A(p)</cite> ： Area occupied by Pads/ Pad fillers</p></li>
+<li><p><cite>A(s)</cite> ： Area occupied by Standard Cells</p></li>
+</ul>
+</section>
+<section id="cell-row-utilization">
+<h5>Cell row utilization<a class="headerlink" href="#cell-row-utilization" title="永久链接至标题">¶</a></h5>
+<p>Cell row utilization <cite>C(F)</cite> of floorplan F is approximated using the following equation:</p>
+<div class="math notranslate nohighlight" id="equation-math-single">
+<span class="eqno">(5)<a class="headerlink" href="#equation-math-single" title="公式的永久链接">¶</a></span>\[C(F) = \frac{A(s)}{A(R -\text{union}(B, E, m, p))}\]</div>
+<ul class="simple">
+<li><p><cite>R</cite> = All cell rows</p></li>
+<li><p><cite>B</cite> = All placement blockages</p></li>
+<li><p><cite>E</cite> = Exclusive Regions</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="block-macro">
+<h3>Block / Macro的放置<a class="headerlink" href="#block-macro" title="永久链接至标题">¶</a></h3>
+<p>若采用展平式物理设计方案，则设计中仅仅由 Macro 和标准单元构成；若采用层次化物理设计方案，则经过 Partitioning 后，顶层设计主要由 Macro、sub-system级别的 Block 构成</p>
+<p>在 Floorplan 阶段，对于前者主要是考虑 Macro 的放置，后者则是要考虑 Macro、Block 的放置</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>Before staring of Floorplan, it is better to have <strong>basic design understanding</strong> , data flow of the design, integration guidelines of any special analog hard IPs in the design. And for block/partition level designs understanding the placement &amp; IO interactions of the block in Full chip will help in coming up with good floorplan.</p>
+</div>
+<p>Macro / Block 的放置显著依赖于设计者的经验，摆放它们时要考虑面积、互连线长等传统问题，还需要考虑Macro / Block 的摆放对于 Place 的影响</p>
+<section id="macro-floorplan-techniques">
+<h4>(Macro) Floorplan Techniques<a class="headerlink" href="#macro-floorplan-techniques" title="永久链接至标题">¶</a></h4>
+<figure class="align-default">
+<img alt="chapter 5/img/floorplantechniques.png" src="chapter 5/img/floorplantechniques.png" />
+</figure>
+<ul class="simple">
+<li><p>Abutted floorplan : Channel less placement of blocks.</p></li>
+<li><p>Non-Abutted / Channeled floorplan  : Channel based placement of blocks.</p></li>
+<li><p>Mix / Narrow-Channel floorplan : partially abutted with some channels.</p></li>
+</ul>
+</section>
+<section id="macro">
+<h4>Macro 放置原则：边缘摆放<a class="headerlink" href="#macro" title="永久链接至标题">¶</a></h4>
+<dl class="simple">
+<dt>边缘摆放的出发动机主要来源于下面两点：</dt><dd><ol class="arabic simple">
+<li><p>从目前芯片设计的趋势来看，芯片中除了计算单元外就是随机存储单元RAM、只读存储单元ROM等。这些存储单元占据的芯片面积在有些设计中甚至超过百分之五十</p>
+<ol class="arabic simple">
+<li><p>对于存储单元来说，存在数据端口和存储端口，并且周围需要有一些可测性电路。这使得这些单元引线众多且功耗巨大</p></li>
+<li><p>将它们*贴边放置*，不仅有利于这些单元的供电，而且防止这些单元过多的引脚对其他单元的布线造成影响。</p></li>
+</ol>
+</li>
+<li><p>标准单元在布局时，按照Row所划定的高度一排一排的摆放</p>
+<ol class="arabic simple">
+<li><p>既有利于算法的设计，又有利于工业制造。</p></li>
+<li><p>在给各个器件供电时，可以使用横向的电源线将处于同一高度的器件连接在一起统一供电</p></li>
+</ol>
+</li>
+<li><p>将标准单元都摆放在芯片区域的中心，而大的Macro摆放在四周，就可以使标准单元方便的只用一条电源线连接在一起，而不会被高度不统一的Macro打断。对电源网格的设计提供了巨大便利</p></li>
+</ol>
+</dd>
+</dl>
+<p>Macro的摆放原则基本如下，可以参照下面这张图</p>
+<figure class="align-default">
+<img alt="chapter 5/img/test.png" src="chapter 5/img/test.png" />
+</figure>
+<p>1）Macro 尽量摆放在靠近相应输入输出口（IO pad cell）的位置</p>
+<p>一般来说对于大型的Macro，他们不仅仅需要与芯片内部的其他Macro或者标准单元进行数据交换，还需要与芯片外部的器件进行通信。</p>
+<p>比如，锁相环单元需要接收外部晶振信号，存储单元需要接收外部地址等。这种数据交换就是靠 IO pad cell 进行的，因此摆放在离相应的数据端口附近，有利于减少互联线长度，减少线上延迟，并节约布线资源。</p>
+<p>2）大的Macro摆放尽量贴近版图的边缘和角落，这样有利于空间的利用，要尽量留出一个连续且尽量接近圆形/方形的Core区域来摆放标准单元。</p>
+<p>3）Macro与Macro之间要留有一定空隙，给予布线资源。</p>
+<p>特别是在Macro的间隙有端口的时候更是如此，设计者可以通过相邻Marco边界上端口的多少来决定留有多大的间隙比较合适，这样才不至于出现Pin Access的问题</p>
+<p>4）合理设置Macro摆放的角度。在考量Macro摆放的角度时，不仅仅考虑空间摆放的因素，还要根据端口的连接关系与互连Macro的位置来决定。</p>
+<p>如前面原理图中存储Macro的端口方向朝向中央，因为中间的标准单元需要与存储Macro进行数据交换，存在互连关系。在实际设计时，不仅要根据端口与标准单元之间的连接关系，还要考虑Macro与Macro之间的互连关系进行综合判断。</p>
+<p>手工对宏单元进行摆放后，需要将他们设置为dont_touch属性，以防止在布局阶段软件对它进行移动。命令为：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">set_dont_touch_placement[all_macro_cells]</span>
+</pre></div>
+</div>
+</section>
+<section id="halo">
+<h4>Halo<a class="headerlink" href="#halo" title="永久链接至标题">¶</a></h4>
+<p>在使用EDA软件的Floorplan设计时，同样可以给 Macro加上 <strong>晕环</strong> （ <cite>halo</cite> ）来控制 Macro 与 Macro 之间的距离 —— 设置不允许摆放标准单元晕道的目的是为了能够提供专用的布线空间</p>
+<figure class="align-default">
+<img alt="chapter 5/img/halo.jpg" src="chapter 5/img/halo.jpg" />
+</figure>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>在ICC中这被称为 <cite>Keepout Margin</cite>，有 <cite>hard</cite> 、 <cite>soft</cite> 之分:</p>
+<p>(1)hard区域不允许任何Cell放置在该区域
+(2)soft则在coarse place的时候不允许任何Cell放入其内，但是在optimization以及legalization的时候是允许Cell放入其内的，也就是只允许Buffer加入其中</p>
+<p>Keepout Margin与Placement Blockage不同，它并不是独立存在的，而是依附于Macro周围，可随Macro移动的。所以它是专门用来控制Macro和其他单元之间距离的一种功能。</p>
+</div>
+<p>在基于标准单元的设计中，标准单元在布局（place）阶段完成了整个芯片内部的摆放，由于标准单元占据了底层金属的绝大多数布线轨道，当芯片局部出现拥塞时，布线晕道就能够提供更多底层的布线通道</p>
+</section>
+<section id="id3">
+<h4>布局障碍<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h4>
+<dl class="simple">
+<dt><cite>blockages</cite> :</dt><dd><p>are specific location where placing of cells are blocked, acts like guidelines for placement of std cells.</p>
+</dd>
+</dl>
+<p>blockages will not be guiding the tool to place the std cells at some particular area, but it won’t allow the tool to place the std cell in the blocked area</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>在 Placement、Routing 阶段都存在 Blockage，均有如下分类</p>
+<p>1）Hard Blockages</p>
+<p>2）Soft Blockages</p>
+<p>3）Partial Blockages</p>
+</div>
+<ul class="simple">
+<li><p>Hard Blockage</p>
+<ul>
+<li><p>Complete Standard Cell Blockage</p></li>
+<li><p>std cell blockages are mostly used to</p>
+<ul>
+<li><p>avoid routing congestion at macro corners</p></li>
+<li><p>Restrict std cells to certain regions in the design</p></li>
+<li><p>control power rail generation at macro cells</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Soft Blockage</p>
+<ul>
+<li><p>Non-Buffering Blockage, only buffers can be placed and std cells cannot be placed</p></li>
+</ul>
+</li>
+<li><p>Partial Blockage</p>
+<ul>
+<li><p>Partial Standard Cell Blockage and is used to avoid congestion</p></li>
+<li><p>We can Block Standard Cells as per the required percentage value</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="fly-lines">
+<h4>fly lines<a class="headerlink" href="#fly-lines" title="永久链接至标题">¶</a></h4>
+</section>
+<section id="block">
+<h4>Block 的放置<a class="headerlink" href="#block" title="永久链接至标题">¶</a></h4>
+<p>在层次化设计中，对于对于各个预计分割的区域之间也需要进行布线通道的定义。布线通道的宽度需要考虑模块布局的拓扑约束，诸如：</p>
+<ul class="simple">
+<li><p>子模块到子模块的界限</p></li>
+<li><p>子模块之间的距离、顺序、排列</p></li>
+<li><p>子模块之间的表面比率、网络权重、子模块隔离区</p></li>
+</ul>
+<p>该部分请参考 Placement 部分</p>
+</section>
+</section>
+<section id="id4">
+<h3>电源网络的规划<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id5">
+<h3>手动规划时钟网络<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<p>Although most ASIC designs use clock tree synthesis, clock tree synthesis
+may not be sufficient for very high-performance and synchronized designs.</p>
+<p>In this case, one needs to implement the distributed clock networks manually
+in order to minimize the skew between communicating elements due to their
+line resistance and capacitance.</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>注意：Floorplanning阶段的时钟网络分布与常规的时钟树综合，其依赖于手动布图规划</p>
+</div>
+</section>
+</section>
+<section id="how-to-evaluate-floorplanning">
+<h2>How to evaluate Floorplanning<a class="headerlink" href="#how-to-evaluate-floorplanning" title="永久链接至标题">¶</a></h2>
+<p>在布图规划、布局中需要多次迭代分析，从而实现最佳效果</p>
+<section id="id6">
+<h3>布局规划阶段的延迟预估<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+</section>
+<section id="id7">
+<h3>Macro布放与布线通道的关系<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
+<p>Macro布放的结果会对前期布图规划的期望目标产生直接影响，其中 <strong>能够保证布线的完成是通过布线通道的分析来进行</strong></p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>介绍相关概念：</p>
+<p>（1）布线轨道（routing track）：芯片内部专门用于布线的路径</p>
+<p>（2）布线通道（routing channel）：每两条 / 多条布线轨道的空间</p>
+</div>
+<p>先前介绍的晕道，实现了预留底层布线通道，解决了当前局部拥塞的问题，但是也会产生其他区域的拥塞问题</p>
+</section>
+</section>
+<section id="placement-routing">
+<h2>与布局（Placement）、布线（Routing）的关系<a class="headerlink" href="#placement-routing" title="永久链接至标题">¶</a></h2>
+<p>Marco、I/O pad cell 、Block 的布放在结果上属于布局，但是其又在布局规划阶段完成，由于其占据的面积（空间）很大，只有 Marco、I/O pad cell 的布放完成后，电源规划才有意义</p>
+<section id="id8">
+<h3>Block / Macro 自动放置的算法推进<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>现代 Soc 设计可以包含数百或更多个 Block，此时就必须借助 EDA 工具来实现 Block 的自动布局</p>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">VLSI物理设计方法学</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter1/index.html">前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning &amp; Design Flow</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, QIAMKING.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/chapter 5/Floorplanning.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

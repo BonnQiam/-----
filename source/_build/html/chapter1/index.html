@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>前言 &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="To do" href="To_Do.html" />
+    <link rel="prev" title="Welcome to 设计方法学’s documentation!" href="../index.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>前言<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="To_Do.html">To do</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html">基本概念</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html#id2">工艺角</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html#pvt">PVT条件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html#pdk">PDK</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html">时钟信号</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html#id2">时钟信号的生成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html#id3">时钟信号的特性</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html#id4">时钟信号的定义</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html#latency">时钟信号的延滞（latency）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html#id5">时钟信号的抖动</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html#id6">时钟信号的偏差</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9F.html">设计约束</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html">设计约束文件格式sdc.rst</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9F.html#id2">时钟方面的约束</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9F.html#id3">与时钟相关的输入输出环境参数</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Design_Flow.html">Design Flow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Design_Flow.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Design_Flow.html#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Design_Flow.html#optimization">Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%8F%82%E8%80%83.html">参考</a></li>
+</ul>
+</div>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">VLSI物理设计方法学</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">前言</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="To_Do.html">To do</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html">基本概念</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html">时钟信号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9F.html">设计约束</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Design_Flow.html">Design Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%82%E8%80%83.html">参考</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter8/index.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter9/index.html">寄生参数提取</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/index.html">静态时序分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/index.html">功耗分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/index.html">信号完整性分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/index.html">可靠性分析</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="上一章">Welcome to 设计方法学’s documentation!</a></li>
+      <li>Next: <a href="To_Do.html" title="下一章">To do</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, QIAMKING.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/chapter1/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

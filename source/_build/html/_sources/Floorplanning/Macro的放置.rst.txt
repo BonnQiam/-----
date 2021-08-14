@@ -1,0 +1,30 @@
+对于Floorplan而言，Macro更依赖于设计者的经验，摆放它们时不仅要考虑面积、互连线长等传统问题，还需要考虑Place阶段，Macro的摆放对于Place的影响
+
+
+(Macro) Floorplan Techniques
+""""""""""""""""""""""""""""""""""""""""
+
+.. figure:: ./img/floorplantechniques.png
+
+*   Abutted floorplan : Channel less placement of blocks.
+*   Non-Abutted / Channeled floorplan  : Channel based placement of blocks.
+*   Mix / Narrow-Channel floorplan : partially abutted with some channels.
+
+
+边缘摆放
+""""""""""""""""""""""""""""""""""""""""
+
+边缘摆放的出发动机主要来源于下面两点：
+    1. 从目前芯片设计的趋势来看，芯片中除了计算单元外就是随机存储单元RAM、只读存储单元ROM等。这些存储单元占据的芯片面积在有些设计中甚至超过百分之五十
+   
+       1. 对于存储单元来说，存在数据端口和存储端口，并且周围需要有一些可测性电路。这使得这些单元引线众多且功耗巨大
+       2. 将它们*贴边放置*，不仅有利于这些单元的供电，而且防止这些单元过多的引脚对其他单元的布线造成影响。
+
+    2. 标准单元在布局时，按照Row所划定的高度一排一排的摆放
+   
+       1. 既有利于算法的设计，又有利于工业制造。
+       2. 在给各个器件供电时，可以使用横向的电源线将处于同一高度的器件连接在一起统一供电
+
+Macro的摆放原则基本如下，可以参照下面这张图：
+
+.. figure:: ./img/macro.png

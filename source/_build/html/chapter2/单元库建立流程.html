@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>单元库建立流程 &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Partitioning" href="../chapter3/index.html" />
+    <link rel="prev" title="时序库文件" href="%E6%97%B6%E5%BA%8F%E5%BA%93%E6%96%87%E4%BB%B6.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>单元库建立流程<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<dl class="simple">
+<dt>逻辑单元的建库流程可以归纳为以下5步 <a class="footnote-reference brackets" href="#id3" id="id2">1</a> :</dt><dd><ul class="simple">
+<li><p>方案设计、论证</p></li>
+<li><p>电路设计</p></li>
+<li><p>版图设计、物理库生成</p></li>
+<li><p>标准单元特征化、库模型生成</p></li>
+<li><p>设计验证</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="footnote brackets">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id2">1</a></span></dt>
+<dd><p>在实际建库过程中由于不同因素的影响通常需要反复迭代才能得到理想的单元库</p>
+</dd>
+</dl>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">VLSI物理设计方法学</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter1/index.html">前言</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="%E5%8D%95%E5%85%83%E5%BA%93%E7%B1%BB%E5%88%AB.html">逻辑单元类别</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8D%95%E5%85%83%E5%BA%93%E7%9B%B8%E5%85%B3%E7%9A%84%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E6%96%87%E4%BB%B6.html">与单元库相关的标准数据格式文件</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">单元库建立流程</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter8/index.html">Routing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Library</a><ul>
+      <li>Previous: <a href="%E6%97%B6%E5%BA%8F%E5%BA%93%E6%96%87%E4%BB%B6.html" title="上一章">时序库文件</a></li>
+      <li>Next: <a href="../chapter3/index.html" title="下一章">Partitioning</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, QIAMKING.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/chapter2/单元库建立流程.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

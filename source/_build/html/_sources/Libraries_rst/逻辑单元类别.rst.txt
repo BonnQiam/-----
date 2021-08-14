@@ -1,0 +1,18 @@
+标准单元
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+模块单元
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+I/O单元
+^^^^^^^^^^^^^^^^^^^^^^
+
+输出输入单元（I/O Pad Cell）包括：
+    - power I/O Pad Cell：电源单元
+    - ground I/O Pad Cell：接地单元
+    - signal I/O Pad Cell：输入信号、输出信号、三态、双向单元
+
+.. note::
+    对于输入信号单元，最重要的是要考虑静电放电 ESD (electrostatic discharge) 的防护

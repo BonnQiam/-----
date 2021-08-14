@@ -1,0 +1,95 @@
+前言
+=======================
+
+To do
+----------------
+
+1. 单元库的建立（具体）
+2. 单元库的类型介绍（具体）
+3. 时序库的建立-> SPICE、器件延时理论模型、线负载模型
+4. 功耗库
+5. 噪声库
+6. 单元 `LEF` 文件的分类（具体）
+7. 工艺角
+8. 天线效应
+9. PVT条件
+10. PDK
+11. Physical Design Implementation Style
+12. ESD
+13. electromigration
+14. IR Drop
+15. technology file (`.tf`)
+16. TLU file
+17. port 与 pin 的区别
+
+基本概念
+------------
+
+工艺角
+^^^^^^^^^^^^^^^^^^^^
+
+最常用的工艺角为：
+    - 最佳 / 最快 -- BC / best case / fast
+    - 典型 / 正常 -- TC / typical case / normal
+    - 最差 / 最满 -- WC / worst case / slow
+
+PVT条件
+^^^^^^^^^^^^^^^^^^^^
+
+process（工艺）、temperature（温度）、voltage（电压）
+
+PDK
+^^^^^^^^^^^^^^^^^^^^
+
+PDK（process design kit） 主要包括技术文件（technology file）、器件模型、原理图符号（schematic symbol）、参数单元（P-Cell）、验证文件集（DRC/LVS/EXT）
+
+器件延时理论模型
+^^^^^^^^^^^^^^^^^^^^
+
+线负载模型
+""""""""""""""""
+
+**器件延时** ：
+
+
+
+时钟信号
+-----------------
+
+系统时钟、全局时钟的概念
+
+时钟信号的生成
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+时钟信号的特性
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+时钟信号的定义
+"""""""""""""""""""""""""
+
+时钟信号的延滞（latency）
+"""""""""""""""""""""""""
+
+时钟信号的延滞（latency），又被称为插入延迟（insertion delay），包括两部分：
+
+- 时钟源插入延迟：来自时钟源到当前芯片时钟根节点之间的延迟
+- 时钟网络插入延迟：时钟树的延迟
+
+时钟信号的抖动
+"""""""""""""""""""""""""
+时钟信号本身的抖动（jitter）定义为信号时间与理想时间时间的偏差（deviation），又称时钟抖动为 uncertainty ，即为不确定性
+
+时钟信号的偏差
+"""""""""""""""""""""""""
+同一时钟信号从时钟根到达任意两个寄存器的延迟（delay）之差称为偏差（skew）
+
+
+
+参考
+-------------
+
+- 陈春章, 艾霞, and 王国雄. 数字集成电路物理设计. 科学出版社, 2008.
+- Golshan, Khosrow. Physical Design Essentials. Springer Science+ Business Media, LLC, 2007.
+- IC Compiler Design Planning User Guide Version E-2010.12-SP2, March 2011
+- https://www.vlsi-backend-adventure.com/floorplan.html#8
+- https://lmr.fi/int/physical-design-pd-interview-questions-floorplanning/
