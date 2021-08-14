@@ -1,20 +1,25 @@
 To do
 ============================
 
-1. 单元库的建立（具体）
-2. 单元库的类型介绍（具体）
-3. 时序库的建立-> SPICE、器件延时理论模型、线负载模型
-4. 功耗库
-5. 噪声库
-6. 单元 `LEF` 文件的分类（具体）
-7. 工艺角
-8. 天线效应
-9. PVT条件
-10. PDK
-11. Physical Design Implementation Style
-12. ESD
-13. electromigration
-14. IR Drop
-15. technology file (`.tf`)
-16. TLU file
-17. port 与 pin 的区别
+概念
+---------------------
+
+1.  ESD
+2.  electromigration
+3.  IR Drop
+4.  technology file (`.tf`)
+5.  TLU file
+6.  port 与 pin 的区别
+
+P.S. 已经出现在大纲的各个章节不纳入上述 List
+
+
+计划
+-----------------------
+
+
+1. 考察 `sdc` 文件
+2. 各个阶段静态时序分析
+3. 功耗分析
+4. 噪声分析
+5. 各个阶段物理实现方案的评估手段以及 why
