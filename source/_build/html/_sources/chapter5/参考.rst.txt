@@ -1,0 +1,6 @@
+参考
+=====================
+
+- IC Compiler Design Planning User Guide Version E-2010.12-SP2, March 2011
+- https://www.vlsi-backend-adventure.com/floorplan.html#8
+- https://lmr.fi/int/physical-design-pd-interview-questions-floorplanning/

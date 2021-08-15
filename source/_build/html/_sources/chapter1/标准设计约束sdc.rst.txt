@@ -1,4 +1,4 @@
-设计约束文件格式`sdc`.rst
+设计约束文件格式 ``sdc``
 ============================
 
 设计约束文件格式 ``sdc`` （Synopsys Design Constraints） 文件基于 TCL （tool command language ）格式，由 Synopsys 开发定义，起初用于电路的逻辑综合。1998年由 Cadence 公司移植用于时序控制的布局布线设计
@@ -9,7 +9,7 @@
 定义
 -------------
 
-**Synopsys Design Constraints (``sdc``)**：
+**Synopsys Design Constraints** ( ``sdc``)：
     a format used to specify the design intent, including the timing, power, and area constraints for a design. 
 
 - ``sdc`` is based on the tool command language (Tcl)
@@ -55,7 +55,7 @@ The syntax of the ``set_units`` command is
     :linenos:
 
     $ set_units -capacitance cap_unit   
-        
+
     $ set_units -resistance res_unit
     
     $ set_units -time time_unit -voltage voltage_unit
@@ -65,8 +65,199 @@ The syntax of the ``set_units`` command is
 核心：Specifying the Design Constraints
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+The `sdc` format consists of the Synopsys constraint commands listed in below
+
++---------------------+-----------------------------------------+
+| Type of information |                Commands                 |
++=====================+=========================================+
+| Operating           | ``conditions set_operating_conditions`` |
++---------------------+-----------------------------------------+
+
++---------------------+-----------------------------------+
+| Type of information |             Commands              |
++=====================+===================================+
+| Wire load models    | ``set_wire_load_min_block_size``  |
++---------------------+-----------------------------------+
+|                     | ``set_wire_load_mode``            |
++---------------------+-----------------------------------+
+|                     | ``set_wire_load_model``           |
++---------------------+-----------------------------------+
+|                     | ``set_wire_load_selection_group`` |
++---------------------+-----------------------------------+
+
++---------------------+----------------------------+
+| Type of information |          Commands          |
++=====================+============================+
+| System interface    | ``set_drive``              |
++---------------------+----------------------------+
+|                     | ``set_driving_cell``       |
++---------------------+----------------------------+
+|                     | ``set_fanout_load``        |
++---------------------+----------------------------+
+|                     | ``set_input_transition``   |
++---------------------+----------------------------+
+|                     | ``set_load``               |
++---------------------+----------------------------+
+|                     | ``set_port_fanout_number`` |
++---------------------+----------------------------+
+
++-------------------------+-------------------------+
+|   Type of information   |        Commands         |
++=========================+=========================+
+| Design rule constraints | ``set_max_capacitance`` |
++-------------------------+-------------------------+
+|                         | ``set_max_fanout``      |
++-------------------------+-------------------------+
+|                         | ``set_max_transition``  |
++-------------------------+-------------------------+
+|                         | ``set_min_capacitance`` |
++-------------------------+-------------------------+
+
++---------------------+----------------------------+
+| Type of information |          Commands          |
++=====================+============================+
+| Timing constraints  | ``create_clock``           |
++---------------------+----------------------------+
+|                     | ``create_generated_clock`` |
++---------------------+----------------------------+
+|                     | ``group_path``             |
++---------------------+----------------------------+
+|                     | ``set_clock_gating_check`` |
++---------------------+----------------------------+
+|                     | ``set_clock_groups``       |
++---------------------+----------------------------+
+|                     | ``set_clock_latency``      |
++---------------------+----------------------------+
+|                     | ``set_clock_sense``        |
++---------------------+----------------------------+
+|                     | ``set_clock_transition``   |
++---------------------+----------------------------+
+|                     | ``set_clock_uncertainty``  |
++---------------------+----------------------------+
+|                     | ``set_data_check``         |
++---------------------+----------------------------+
+|                     | ``set_disable_timing``     |
++---------------------+----------------------------+
+|                     | ``set_ideal_latency``      |
++---------------------+----------------------------+
+|                     | ``set_ideal_network``      |
++---------------------+----------------------------+
+|                     | ``set_ideal_transition``   |
++---------------------+----------------------------+
+|                     | ``set_input_delay``        |
++---------------------+----------------------------+
+|                     | ``set_max_time_borrow``    |
++---------------------+----------------------------+
+|                     | ``set_output_delay``       |
++---------------------+----------------------------+
+|                     | ``set_propagated_clock``   |
++---------------------+----------------------------+
+|                     | ``set_resistance``         |
++---------------------+----------------------------+
+|                     | ``set_timing_derate``      |
++---------------------+----------------------------+
+
+
++---------------------+-------------------------+
+| Type of information |        Commands         |
++=====================+=========================+
+| Timing exceptions   | ``set_false_path``      |
++---------------------+-------------------------+
+|                     | ``set_max_delay``       |
++---------------------+-------------------------+
+|                     | ``set_min_delay``       |
++---------------------+-------------------------+
+|                     | ``set_multicycle_path`` |
++---------------------+-------------------------+
+
++-------------------------------------------------+---------------------------------+
+|               Type of information               |            Commands             |
++=================================================+=================================+
+| Area constraints                                | ``set_max_area``                |
++-------------------------------------------------+---------------------------------+
+| Multivoltage and power optimization constraints | ``create_voltage_area``         |
++-------------------------------------------------+---------------------------------+
+|                                                 | ``set_level_shifter_strategy``  |
++-------------------------------------------------+---------------------------------+
+|                                                 | ``set_level_shifter_threshold`` |
++-------------------------------------------------+---------------------------------+
+|                                                 | ``set_max_dynamic_power``       |
++-------------------------------------------------+---------------------------------+
+|                                                 | ``set_max_leakage_power``       |
++-------------------------------------------------+---------------------------------+
+| Logic assignments                               | ``set_case_analysis``           |
++-------------------------------------------------+---------------------------------+
+|                                                 | ``set_logic_dc``                |
++-------------------------------------------------+---------------------------------+
+|                                                 | ``set_logic_one``               |
++-------------------------------------------------+---------------------------------+
+|                                                 | ``set_logic_zero``              |
++-------------------------------------------------+---------------------------------+
+
+
 Specifying Design Objects
 """"""""""""""""""""""""""""""""
+Most of the constraint commands **require a design object** as a command argument. ``sdc`` supports both implicit and explicit object specification.
+
+implicit object specification
+*********************************
+
+If you specify a simple name for an object, the Synopsys tools determine the object type by searching for the object **using a prioritized object list**
+
+P.S.The priority order varies by command and is documented in each command’s man page.
+
+explicit object specification
+***********************************
+
+To avoid ambiguity, explicitly specify the object type by using a nested object access command. 
+
+For example, if you have a cell in the current instance named ``U1``, the implicit specification is ``U1``, while the explicit specification is ``get_cells U1``.
+
++----------+--------------------+--------------------------------------------------+
+|  Design  |   object Access    |               command Description                |
++==========+====================+==================================================+
+| design   | ``current_design`` | A container for cells                            |
++----------+--------------------+--------------------------------------------------+
+|          |                    | A block                                          |
++----------+--------------------+--------------------------------------------------+
+| clock    | ``get_clocks``     | A clock in a design                              |
++----------+--------------------+--------------------------------------------------+
+|          | ``all_clocks``     | All clocks in a design                           |
++----------+--------------------+--------------------------------------------------+
+| port     | ``get_ports``      | An entry point to or exit point from a design    |
++----------+--------------------+--------------------------------------------------+
+|          | ``all_inputs``     | All entry points to a design                     |
++----------+--------------------+--------------------------------------------------+
+|          | ``all_outputs``    | All exit points from a design                    |
++----------+--------------------+--------------------------------------------------+
+| cell     | ``get_cells``      | An instance of a design or library cell          |
++----------+--------------------+--------------------------------------------------+
+| pin      | ``get_pins``       | An instance of a design port or library cell pin |
++----------+--------------------+--------------------------------------------------+
+| net      | ``get_nets``       | A connection between cell pins and design ports  |
++----------+--------------------+--------------------------------------------------+
+| library  | ``get_libs``       | A container for library cells                    |
++----------+--------------------+--------------------------------------------------+
+| lib_cell | ``get_lib_cells``  | A primitive logic element                        |
++----------+--------------------+--------------------------------------------------+
+| lib_pin  | ``get_lib_pins``   | An entry point to or exit point from a lib_cell  |
++----------+--------------------+--------------------------------------------------+
+| register | ``all_registers``  | A sequential logic cell                          |
++----------+--------------------+--------------------------------------------------+
+
+P.S. The clock design object includes both standard clocks and generated clocks.
+
+Specifying Multiple Objects
+***********************************
+
+Specifying Hierarchical Objects
+***********************************
+
 
 Using Comments
 ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+参考
+------------------
+
+- Using the Synopsys® Design Constraints Format Application Note Version 1.9, December 2010

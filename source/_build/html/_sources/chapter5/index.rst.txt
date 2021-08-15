@@ -13,6 +13,7 @@ Floorplanning
     ./电源规划.rst
     ./时钟规划.rst
     ./Floorplanning的评估.rst
+    ./参考.rst
 
 .. warning::
     **To do** ：fly lines、布局障碍、电源规划、时钟规划、Floorplanning 评估
