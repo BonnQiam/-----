@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>电源网络的电压降 &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="信号完整性分析" href="../chapter12/index.html" />
+    <link rel="prev" title="动态功耗分析" href="%E5%8A%A8%E6%80%81%E5%8A%9F%E8%80%97%E5%88%86%E6%9E%90%EF%BC%88%E5%90%AB%E6%80%BB%E5%8A%9F%E8%80%97%EF%BC%89.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>电源网络的电压降<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>电源供电的好坏可以用电压降（IR Drop）衡量，过大的电压降会影响延迟的变化，降低噪声容限的值，从而导致时序违例，时钟偏差（skew）增大进而产生功能失效</p>
+<p>电压降的问题已经变得尤为突出，因此分析由于封装引起的电压降并将其控制在合理范围是芯片设计首要考虑的问题</p>
+<section id="id2">
+<h2>电压降<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>理论设计假设芯片内的电源为理想电源，其能够在瞬间给芯片上的所有门单元与 macro 提供足够大的电流，从而使得芯片上的电压保持为稳定的值。</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>由于芯片内部供电网络 <a class="reference internal" href="../chapter9/index.html"><span class="doc">寄生参数提取</span></a> 的存在，从而导致电源输入输出接口（PAD，封装称之为凸点）到达芯片内部各点的电势不同，其差值称为电压降（IR Drop）</p>
+</div>
+<p>电压降分为两种：
+- 内部节点的电源电压 <span class="math notranslate nohighlight">\(V_{dd}\)</span> 低于供电凸点的电压降
+- 内部节点的地电压 <span class="math notranslate nohighlight">\(V_{ss}\)</span> 高于供电凸点的 “地弹” （ground bouncing） 两种</p>
+</section>
+<section id="id3">
+<h2>产生电压降的因素<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<p>供电网络</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">VLSI物理设计方法学</a></h1>
+
+
+
+
+
+
+
+
+<h3>导航</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../chapter1/index.html">前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter8/index.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter9/index.html">寄生参数提取</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/index.html">静态时序分析</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">功耗分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/index.html">信号完整性分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/index.html">可靠性分析</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">功耗分析</a><ul>
+      <li>Previous: <a href="%E5%8A%A8%E6%80%81%E5%8A%9F%E8%80%97%E5%88%86%E6%9E%90%EF%BC%88%E5%90%AB%E6%80%BB%E5%8A%9F%E8%80%97%EF%BC%89.html" title="上一章">动态功耗分析</a></li>
+      <li>Next: <a href="../chapter12/index.html" title="下一章">信号完整性分析</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">快速搜索</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="转向" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, QIAMKING.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/chapter11/电源网络的电压降.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
