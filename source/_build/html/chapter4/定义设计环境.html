@@ -14,6 +14,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/translations.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="综合阶段中的设计约束" href="%E7%BB%BC%E5%90%88%E9%98%B6%E6%AE%B5%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9F.html" />
@@ -36,6 +37,21 @@
             
   <section id="id1">
 <h1>定义设计环境<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>就电路的环境属性、时序和负载在不同模块间的分配进行设定</p>
+<section id="id2">
+<h2>设计环境<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[Before a design can be optimized, you must **define the environment** in which the design is expected to operate.\]</div>
+<p>You define the environment by specifying:</p>
+<ul class="simple">
+<li><p><strong>operating condition</strong> s : Operating conditions include temperature, voltage, and process variations</p></li>
+<li><p><strong>wire load model</strong> s : Wire load models estimate the effect of wire length on design performance. System interface</p></li>
+<li><p><strong>system interface characteristic</strong> s : characteristics include input drives, input and output loads, and fanout loads.</p></li>
+</ul>
+<p>The environment model directly affects design synthesis results.</p>
+<p>P.S. In Design Compiler, the model is defined by a set of attributes and constraints that you
+assign to the design</p>
+</section>
 </section>
 
 

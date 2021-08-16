@@ -1,2 +1,21 @@
 定义设计环境
 ======================
+
+就电路的环境属性、时序和负载在不同模块间的分配进行设定
+
+设计环境
+---------------------
+
+.. math::
+    Before a design can be optimized, you must **define the environment** in which the design is expected to operate. 
+
+You define the environment by specifying:
+ 
+- **operating condition** s : Operating conditions include temperature, voltage, and process variations
+- **wire load model** s : Wire load models estimate the effect of wire length on design performance. System interface
+- **system interface characteristic** s : characteristics include input drives, input and output loads, and fanout loads. 
+
+The environment model directly affects design synthesis results.
+
+P.S. In Design Compiler, the model is defined by a set of attributes and constraints that you
+assign to the design

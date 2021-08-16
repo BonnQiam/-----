@@ -16,8 +16,8 @@
     <script src="../_static/translations.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="综合结果评估" href="%E7%BB%BC%E5%90%88%E7%BB%93%E6%9E%9C%E8%AF%84%E4%BC%B0.html" />
-    <link rel="prev" title="Synthesis" href="index.html" />
+    <link rel="next" title="综合结果评估（Analyze）" href="%E7%BB%BC%E5%90%88%E7%BB%93%E6%9E%9C%E8%AF%84%E4%BC%B0.html" />
+    <link rel="prev" title="定义设计环境" href="%E5%AE%9A%E4%B9%89%E8%AE%BE%E8%AE%A1%E7%8E%AF%E5%A2%83.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -36,15 +36,80 @@
             
   <section id="id1">
 <h1>综合阶段中的设计约束<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>约束条件主要包括时序约束、面积约束、电路的环境属性、时序和负载在不同模块间的分配()</p>
+<p>基于 design compiler 阐述综合阶段的设计约束</p>
+<p>When Design Compiler optimizes your design, it uses two types of constraints:</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>Design Compiler tries to meet both design rule constraints and optimization constraints, but <strong>design rule constraints take precedence</strong> .</p>
+</div>
+<figure class="align-default">
+<img alt="../_images/Constraints.png" src="../_images/Constraints.png" />
+</figure>
+<p>P.S. 上图中没有包含 <strong>功耗方面的约束</strong> ，请参考下文</p>
+<section id="design-rule-constraints">
+<h2>Design rule constraints<a class="headerlink" href="#design-rule-constraints" title="永久链接至标题">¶</a></h2>
+<p><strong>Design rule constraints</strong> are <strong>implicit</strong> constraints:</p>
+<ul class="simple">
+<li><p>the technology library defines <strong>Design rule constraints</strong></p></li>
+<li><p><strong>Design rule constraints</strong> are requirements for a design to function correctly</p></li>
+<li><p><strong>Design rule constraints</strong> apply to any design using the library</p></li>
+</ul>
+<p>You can make these constraints <strong>more restrictive</strong> than optimization constraints</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Object</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_max_fanout</span></code></p></td>
+<td><p>Input ports or designs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_fanout_load</span></code></p></td>
+<td><p>Output ports</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_load</span></code></p></td>
+<td><p>Ports or nets</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_max_transition</span></code></p></td>
+<td><p>Ports or designs</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">set_cell_degradation</span></code></p></td>
+<td><p>Input ports</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">set_min_capacitance</span></code></p></td>
+<td><p>Input ports</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="optimization-constraints">
+<h2>Optimization constraints<a class="headerlink" href="#optimization-constraints" title="永久链接至标题">¶</a></h2>
+<p><strong>Optimization constraints</strong> are explicit constraints (you define them), represent speed and area design goals and restrictions that you want but that might not be crucial to the operation of a design.</p>
+<p>Optimization constraints apply to the design on which you are working for the duration of the <code class="docutils literal notranslate"><span class="pre">dc_shell</span></code> session and represent the design’s goals. They must be realistic</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>Speed (timing) constraints have higher priority than area.</p>
+</div>
+<section id="timing-constraints-performance-and-speed">
+<h3>Timing constraints (performance and speed)<a class="headerlink" href="#timing-constraints-performance-and-speed" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>Input and output delays (synchronous paths)</p></li>
+<li><p>Minimum and maximum delay (asynchronous paths)</p></li>
+</ul>
+</section>
+<section id="maximum-area-number-of-gates">
+<h3>Maximum area (number of gates)<a class="headerlink" href="#maximum-area-number-of-gates" title="永久链接至标题">¶</a></h3>
+<p>面积约束</p>
+</section>
 <section id="id2">
-<h2>时序约束<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<h3>功耗约束<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<p>If you use the <strong>Power Compiler</strong> tool from Synopsys,  <code class="docutils literal notranslate"><span class="pre">max_dynamic_power</span></code> and <code class="docutils literal notranslate"><span class="pre">max_leakage_power</span></code> are optimization constraints.</p>
 </section>
-<section id="id3">
-<h2>面积约束<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
-</section>
-<section id="id4">
-<h2>定义环境属性<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 </section>
 </section>
 
@@ -71,6 +136,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#id1">参考</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
@@ -87,8 +153,8 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">Synthesis</a><ul>
-      <li>Previous: <a href="index.html" title="上一章">Synthesis</a></li>
-      <li>Next: <a href="%E7%BB%BC%E5%90%88%E7%BB%93%E6%9E%9C%E8%AF%84%E4%BC%B0.html" title="下一章">综合结果评估</a></li>
+      <li>Previous: <a href="%E5%AE%9A%E4%B9%89%E8%AE%BE%E8%AE%A1%E7%8E%AF%E5%A2%83.html" title="上一章">定义设计环境</a></li>
+      <li>Next: <a href="%E7%BB%BC%E5%90%88%E7%BB%93%E6%9E%9C%E8%AF%84%E4%BC%B0.html" title="下一章">综合结果评估（Analyze）</a></li>
   </ul></li>
   </ul></li>
 </ul>
