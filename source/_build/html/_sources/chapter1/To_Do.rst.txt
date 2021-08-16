@@ -10,6 +10,7 @@ To do
 4.  technology file (`.tf`)
 5.  TLU file
 6.  port 与 pin 的区别
+7.  verification、validation、simulation 的区别与联系
 
 P.S. 已经出现在大纲的各个章节不纳入上述 List
 
