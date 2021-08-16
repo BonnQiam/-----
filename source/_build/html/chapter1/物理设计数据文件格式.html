@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>设计约束 &#8212; VLSI物理设计方法学 V0.1 文档</title>
+    <title>物理设计数据文件格式 &#8212; VLSI物理设计方法学 V0.1 文档</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script src="../_static/translations.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="设计约束文件格式 sdc" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html" />
-    <link rel="prev" title="时钟信号" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html" />
+    <link rel="next" title="参考" href="%E5%8F%82%E8%80%83.html" />
+    <link rel="prev" title="Design Flow" href="Design_Flow.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -35,40 +35,19 @@
           <div class="body" role="main">
             
   <section id="id1">
-<h1>设计约束<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p><strong>Constraints</strong> are declarations that define your design’s goals in measurable circuit characteristics such as timing, area, and capacitance.</p>
-<div class="admonition note">
-<p class="admonition-title">注解</p>
-<p>设计约束始终贯穿着集成电路物理实现的流程中，也是整个实现流程中体现物理设计方案质量的核心之一，本质是EDA工具通过开放设计约束入口，驱动内置封装的组合优化算法进行有方向有侧重的物理实现与优化，从而尽可能实现设计者的目的</p>
-</div>
-<p>因此物理实现的最终电路结果是与设计者施加的约束条件密切相关，同时由于物理实现的工具繁多，每个工具使用过程中中均会引入相应的设计约束，将各个阶段的设计约束进行汇总分析的工作尚未完成（ <strong>待查</strong> ）</p>
-<p>P.S. 为了检验电路是否满足约束，自然会各类分析手段，诸如时序分析、功耗分析、信号完整性分析</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html">设计约束文件格式 <code class="docutils literal notranslate"><span class="pre">sdc</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html#id1">定义</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html#id2">内容</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html#specifying-the-sdc-version">Specifying the SDC Version</a></li>
-<li class="toctree-l3"><a class="reference internal" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html#specifying-the-units">Specifying the Units</a></li>
-<li class="toctree-l3"><a class="reference internal" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html#specifying-the-design-constraints">核心：Specifying the Design Constraints</a></li>
-<li class="toctree-l3"><a class="reference internal" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html#using-comments">Using Comments</a></li>
+<h1>物理设计数据文件格式<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<section id="def">
+<h2>设计交换格式 <code class="docutils literal notranslate"><span class="pre">def</span></code> 文件<a class="headerlink" href="#def" title="永久链接至标题">¶</a></h2>
+<dl class="simple">
+<dt><strong>设计交换格式</strong> <code class="docutils literal notranslate"><span class="pre">def</span></code> 文件：</dt><dd><p>设计交换格式（ <code class="docutils literal notranslate"><span class="pre">def</span></code> ， design exchange format）文件是展平式的设计网表文件，是不同的 EDA工具交互过程中的主流数据交换格式</p>
+</dd>
+</dl>
+<p>设计交换格式 <code class="docutils literal notranslate"><span class="pre">def</span></code> 文件是一种带有信息的网表，除了包括 Verilog 所包含的连接信息外，还有各个单元所存在的物理信息 —— 定义了芯片的面积（布图规划后的记录）、布图规划区域定义、电压域定义（电源规划后的记录）、标注单元行、标准单元的位置属性、端口位置信息（布局后的记录）、布线的内容、网线 Net 的连接以及一些连接网线的连接（布线后的记录）</p>
+<p>应用示例：</p>
+<ul class="simple">
+<li><p>在布局阶段根据不同的需求导出相应的布图规划、布局信息，从而实现数据交互</p></li>
+<li><p>在电源规划时，有多个电压域，分别将各个电压域的电源线导出为分立的 <code class="docutils literal notranslate"><span class="pre">def</span></code> ，再读入设计</p></li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html#id3">参考</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<section id="id2">
-<h2>时钟方面的约束<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<p>给出 “时钟信号”（时钟定义、时钟延滞、不确定性），进而为布局、时钟树综合、布线提供时序约束参考点</p>
-<div class="admonition note">
-<p class="admonition-title">注解</p>
-<p>时钟定义将通过时钟树综合来实现，时钟延滞、时钟抖动将在静态时序分析中进行检查</p>
-</div>
-</section>
-<section id="id3">
-<h2>与时钟相关的输入输出环境参数<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 </section>
 </section>
 
@@ -95,7 +74,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html#id1">参考</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
@@ -112,8 +90,8 @@
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
   <li><a href="index.html">前言</a><ul>
-      <li>Previous: <a href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html" title="上一章">时钟信号</a></li>
-      <li>Next: <a href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html" title="下一章">设计约束文件格式 <code class="docutils literal notranslate"><span class="pre">sdc</span></code></a></li>
+      <li>Previous: <a href="Design_Flow.html" title="上一章">Design Flow</a></li>
+      <li>Next: <a href="%E5%8F%82%E8%80%83.html" title="下一章">参考</a></li>
   </ul></li>
   </ul></li>
 </ul>
@@ -148,7 +126,7 @@
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/chapter1/设计约束.rst.txt"
+      <a href="../_sources/chapter1/物理设计数据文件格式.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 
