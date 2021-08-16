@@ -11,7 +11,7 @@ Synthesis
 
 以 Design Compiler 为例，其流程如下：
 
-.. figure:: ./DC综合流程.png
+.. figure:: ./DC综合.png
 
 综合时基于设计约束、设计文件的信息，将RTL模块综合成门级网表，然后对综合出的网表进行评估，检验其是否满足约束条件
 
