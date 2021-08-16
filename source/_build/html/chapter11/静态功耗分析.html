@@ -95,7 +95,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html#id1">参考</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
@@ -104,8 +103,14 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter10/index.html">静态时序分析</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">功耗分析</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">静态功耗分析</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">泄露电流</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">静态功耗计算</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">泄露电流</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">反偏二极管泄漏电流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">门栅感应漏极泄漏电流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">亚阈值泄漏电流</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">门栅泄漏电流</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">静态功耗计算</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="%E5%8A%A8%E6%80%81%E5%8A%9F%E8%80%97%E5%88%86%E6%9E%90%EF%BC%88%E5%90%AB%E6%80%BB%E5%8A%9F%E8%80%97%EF%BC%89.html">动态功耗分析</a></li>
@@ -188,19 +193,43 @@
 <p>静态功耗又称泄露功耗，指电路处于等待或不激活状态时泄露电流所产生的功耗</p>
 <div class="section" id="id2">
 <h2>泄露电流<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<ol class="arabic simple">
-<li><p>反偏二极管泄漏电流</p></li>
-<li><p>门栅感应漏极泄漏电流</p></li>
-<li><p>亚阈值泄漏电流</p></li>
-<li><p>门栅泄漏电流</p></li>
-</ol>
-</div>
 <div class="section" id="id3">
-<h2>静态功耗计算<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h3>反偏二极管泄漏电流<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<dl class="simple">
+<dt><strong>源/漏极泄漏电流</strong> ：</dt><dd><p>衬底、阱、源、漏组成的晶体管存在 <strong>反偏二极管</strong> ，由反偏二极管形成的泄露电流 <span class="math notranslate nohighlight">\(I_{\text{reverse}}\)</span> 是源/漏极对衬底的电流，又称为 <strong>源/漏极泄漏电流</strong> (source / drain leakage current)</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id4">
+<h3>门栅感应漏极泄漏电流<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+<p>在纳米级工艺过程中，还要关注栅极感应的漏极（与衬底之间）泄露电流 <span class="math notranslate nohighlight">\(I_{\text{GIDL}}\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>实验通过比较体场效应管、薄体和双栅 MOS 等多种器件，认为栅极感应的漏极电流 <span class="math notranslate nohighlight">\(I_{\text{GIDL}}\)</span> 是由漏区（对 nMOS）与栅极感应的沟道区接近漏端的积累区（对 nMOS，栅压为负时，沟道积累区为 p 型）之间形成的高载流子浓度反向 pn 结隧穿电流而产生</p>
+</div>
+<p>上述隧穿电流会因为等离子体工艺加工过程中在 <span class="math notranslate nohighlight">\(\text{Si/SiO}_2\)</span> 界面处陷阱的增加而加剧，实验发现 <span class="math notranslate nohighlight">\(I_{\text{GIDL}}\)</span> 是天线面积比率的函数，其随着晶体管衬底厚度的减小而减小</p>
+</div>
+<div class="section" id="id5">
+<h3>亚阈值泄漏电流<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<dl class="simple">
+<dt>DIBL效应：</dt><dd><p>基于半导体物理学，当栅极偏置电压很低时，沟道载流子受到源端的势垒的阻挡，源漏间的电流很小。当漏极电流 <span class="math notranslate nohighlight">\(\text{V}_{\text{DS}}\)</span> 升高时，会降低该势垒的高度，导致沟道电流受源漏电压的影响，称该机理为 DIBL （drain-induced barrier lowering）</p>
+</dd>
+</dl>
+<p>在亚阈值下的源漏电流（亚阈值电流 <span class="math notranslate nohighlight">\(\text{I}_{\text{DS}}\)</span> ，subthreshold current），主要是沟道载流子的扩散引起的</p>
+</div>
+<div class="section" id="id6">
+<h3>门栅泄漏电流<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
+<p>在纳米尺度 CMOS 中，由于其栅电介质（通常是 <span class="math notranslate nohighlight">\(\text{SiO}_2\)</span> ）越来越薄，使得门栅泄露电流 <span class="math notranslate nohighlight">\(\text{I}_\text{Gate}\)</span> 产生的功耗越来越受到重视</p>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>静态功耗计算<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
 <p>芯片的静态功耗是由漏电流引起的泄露功耗</p>
 <div class="math notranslate nohighlight">
 \[P_{\text{leakage}}=V_{\text{DD}}\cdot I_{\text{leakage}}\]</div>
-<p>其中 <span class="math notranslate nohighlight">\(V_{\text{leakage}}\)</span> 是晶体管的供电电压， <span class="math notranslate nohighlight">\(I_{\text{leakage}}\)</span> 是总的泄露电流</p>
+<p>其中 <span class="math notranslate nohighlight">\(V_{\text{leakage}}\)</span> 是晶体管的供电电压， <span class="math notranslate nohighlight">\(I_{\text{leakage}}\)</span> 是总的泄露电流（假设端口 G 与 D 连在一起，B 与 S 连在一起）：</p>
+<div class="math notranslate nohighlight">
+\[I_{\text{leakage}}=I_{\text{reverse}} + I_{\text{GIDL}} + I_{\text{DS}} + I_{\text{gate}}\]</div>
 </div>
 </div>
 

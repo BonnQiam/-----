@@ -95,7 +95,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html#id1">参考</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
@@ -105,9 +104,12 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">功耗分析</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="%E9%9D%99%E6%80%81%E5%8A%9F%E8%80%97%E5%88%86%E6%9E%90.html">静态功耗分析</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">动态功耗分析</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">开关功耗</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">短路功耗</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">动态功耗计算 &amp; 总功耗</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">开关功耗</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">器件功耗</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">短路功耗</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">动态功耗计算</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="%E7%94%B5%E5%8E%8B%E9%99%8D.html">电源网络的电压降</a></li>
@@ -189,15 +191,26 @@
 <p>动态功耗是芯片在工作中，晶体管处于跳变状态中所产生的功耗，主要由动态开关功耗/跳变功耗 <span class="math notranslate nohighlight">\(P_{\text{sw}}\)</span>，短路电流产生的短路功耗 <span class="math notranslate nohighlight">\(P_{\text{sc}}\)</span> 两部分组成</p>
 <div class="section" id="id2">
 <h2>开关功耗<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>开关功耗 <span class="math notranslate nohighlight">\(P_{\text{sw}}\)</span> 是在逻辑门的开关时间中所产生的功耗，即在 CMOS 逻辑门输出节点电压产生一个逻辑转换时，电源对输出节点电容的充电所产生的功耗。在充电的过程中，输出节点的电压通常会从 <span class="math notranslate nohighlight">\(0\)</span> 完全转换到  <span class="math notranslate nohighlight">\(\text{V}_{DD}\)</span>，电源在一个充放电的周期中提供的能量一半将以热的形式在 PMOS 管导通时被消耗 —— <strong>动态功耗主要是逻辑门的输出电容引起</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>EDA 工具在实际应用将开关功耗分成 <strong>器件功耗</strong> 、 <strong>网线负载功耗</strong> 两部分</p>
 </div>
 <div class="section" id="id3">
-<h2>短路功耗<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<h3>器件功耗<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+</div>
 </div>
 <div class="section" id="id4">
-<h2>动态功耗计算 &amp; 总功耗<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>短路功耗<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>当 CMOS 逻辑门被有限上升沿与下降沿（slew）的输入电压来驱动时，在开关的过程中 PMOS 、NMOS 的晶体管就会在短时间内同步导通，从而在电源和地之间形成一条直流通路，并产生短路功耗 <span class="math notranslate nohighlight">\(\text{P}_{\text{sc}}\)</span></p>
+</div>
+<div class="section" id="id5">
+<h2>动态功耗计算<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[P_{\text{dynamic}}=P_{\text{dynamic,sw}} + P_{\text{sc}}\]</div>
 <ul class="simple">
-<li><p>动态功耗分析采用 <strong>无向量法</strong> 时需要使用 <cite>spf</cite> 、<cite>twf</cite> 、<cite>vcd</cite> 中的动态信息或 <cite>tcf</cite> 及 <cite>sdc</cite> 文件</p></li>
-<li><p>以 <cite>vcd</cite> 作向量法的动态功耗需要完整的 <cite>vcd</cite> 、 <cite>DSPF</cite> 、 <cite>twf</cite>、 <cite>sdc</cite> 文件</p></li>
+<li><p>采用 <strong>无向量法</strong> 时需要使用 <cite>spf</cite> 、<cite>twf</cite> 、<cite>vcd</cite> 中的动态信息或 <cite>tcf</cite> 及 <cite>sdc</cite> 文件</p></li>
+<li><p>以 <cite>vcd</cite> 作 <strong>向量法</strong> 的动态功耗需要完整的 <cite>vcd</cite> 、 <cite>DSPF</cite> 、 <cite>twf</cite>、 <cite>sdc</cite> 文件</p></li>
 </ul>
 </div>
 </div>

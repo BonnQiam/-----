@@ -94,14 +94,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html#id1">参考</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Floorplanning</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="%E6%A6%82%E8%BF%B0.html">Floorplanning 概述</a></li>
 <li class="toctree-l2"><a class="reference internal" href="%E5%B8%83%E5%B1%80IO%E5%8D%95%E5%85%83.html">布局I/O单元</a></li>
 <li class="toctree-l2"><a class="reference internal" href="%E7%A1%AE%E5%AE%9A%E8%8A%AF%E7%89%87%E9%9D%A2%E7%A7%AF.html">确定芯片面积</a></li>
 <li class="toctree-l2"><a class="reference internal" href="%E5%B8%83%E5%B1%80Macro.html">布局Macro</a></li>
 <li class="toctree-l2"><a class="reference internal" href="%E5%B8%83%E5%B1%80Block.html">布局Block</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">电源规划</a><ul class="simple">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">电源规划</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">供电网络的设计内容</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">全局电源</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">电源环线</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">电源条线</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E8%A7%84%E5%88%92.html">时钟规划</a></li>
@@ -189,8 +192,37 @@
             
   <div class="section" id="id1">
 <h1>电源规划<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
-<p>电源网络设计是十分重要的，其质量直接影响芯片的性能</p>
+<p>电源网络设计要为芯片的供电提供可靠的保障，其质量直接影响芯片的性能</p>
 <div class="toctree-wrapper compound">
+</div>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>下述阐述的电源网络设计是针对普通的 I/O pad cell 四方分布的数字芯片设计</p>
+</div>
+<div class="section" id="id2">
+<h2>供电网络的设计内容<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>供电网络设计的主要内容有如下几个部分：</p>
+<ol class="arabic simple">
+<li><p>global net connect : 电源连接关系的定义</p></li>
+<li><p>power ring ： 芯片核内（core）部分的 <strong>电源环</strong> 设计</p></li>
+<li><p>芯片内所含的 Macro 的 <strong>电源环</strong> 设计</p></li>
+<li><p>power stripe ： 芯片核内纵横交错的电源网格的设计</p></li>
+<li><p>I/O 单元 power ： 芯片的供电单元与电源环的连接</p></li>
+<li><p>ring pins : 芯片内部电源网络和 Macro 电源环连接部分的设计</p></li>
+<li><p>followpins : 将标准单元的供电网络与核内电源网络总连接设计</p></li>
+<li><p>I/O 单元 power ring ： I/O 供电单元电源环的设计</p></li>
+</ol>
+<p>完成上述设计内容后还需要对电源网络进行检查，检查是否存在短路和开路以及供电不足等问题</p>
+<p>P.S. 对于 Flip Chip 的设计，供电网络的设计还包括电源的凸点 bump 的设计以及布线</p>
+</div>
+<div class="section" id="id3">
+<h2>全局电源<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id4">
+<h2>电源环线<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="id5">
+<h2>电源条线<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
 </div>
 </div>
 

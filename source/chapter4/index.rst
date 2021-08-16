@@ -19,6 +19,6 @@ Synthesis
     对于整个芯片的综合，其综合过程会与单独的RTL模块的有一定的区别（待查）
 
 参考
-=================
+------------------------
 
 - Design Compiler® User Guide Version E-2010.12-SP2, March 2011
