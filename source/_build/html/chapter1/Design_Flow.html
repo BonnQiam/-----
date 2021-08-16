@@ -1,80 +1,114 @@
 
+
 <!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Design Flow &mdash; VLSI物理设计方法学 V0.1 文档</title>
+  
 
-<html lang="zh_CN">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
 
-    <title>Design Flow &#8212; VLSI物理设计方法学 V0.1 文档</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/translations.js"></script>
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="参考" href="%E5%8F%82%E8%80%83.html" />
-    <link rel="prev" title="设计约束文件格式 sdc" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html" />
+    <link rel="next" title="物理设计数据文件格式" href="%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html" />
+    <link rel="prev" title="设计约束文件格式 sdc" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
    
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
-
-  </head><body>
-  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
           
 
-          <div class="body" role="main">
+          
+            <a href="../index.html" class="icon icon-home"> VLSI物理设计方法学
+          
+
+          
+          </a>
+
+          
             
-  <section id="design-flow">
-<h1>Design Flow<a class="headerlink" href="#design-flow" title="永久链接至标题">¶</a></h1>
-<section id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="永久链接至标题">¶</a></h2>
-<p><a class="reference internal" href="../chapter4/index.html"><span class="doc">Synthesis</span></a> -&gt; <a class="reference internal" href="../chapter5/index.html"><span class="doc">Floorplanning</span></a> -&gt; <a class="reference internal" href="../chapter6/index.html"><span class="doc">Placement</span></a> -&gt; <a class="reference internal" href="../chapter7/index.html"><span class="doc">CTS</span></a> -&gt; <a class="reference internal" href="../chapter8/index.html"><span class="doc">Routing</span></a></p>
-<p>从布图规划开始，到电源规划到完成布局，每一步规划不仅仅要考虑布线的实现，还要在布局完成之后时提供好的数据环境，供时钟树综合使用</p>
-</section>
-<section id="verification">
-<h2>Verification<a class="headerlink" href="#verification" title="永久链接至标题">¶</a></h2>
-<p>通过 <a class="reference internal" href="../chapter9/index.html"><span class="doc">寄生参数提取</span></a> 提取布线后寄生参数，最终转化为 <cite>sdf</cite> 文件，进行 post-layout gate level simulation 、 <a class="reference internal" href="../chapter10/index.html"><span class="doc">静态时序分析</span></a></p>
-<p>纳米节点下集成电路的时序分析离不开考虑电源的影响，要预先或同时考虑 <a class="reference internal" href="../chapter11/index.html"><span class="doc">功耗分析</span></a>;同时需要考虑噪声对时序的影响，故要预先或同时考虑 <a class="reference internal" href="../chapter12/index.html"><span class="doc">信号完整性分析</span></a> 的相互牵制关系</p>
-</section>
-<section id="optimization">
-<h2>Optimization<a class="headerlink" href="#optimization" title="永久链接至标题">¶</a></h2>
-<p>时序优化以修复时序违例</p>
-</section>
-</section>
+            
+          
 
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
 
-          </div>
           
         </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">VLSI物理设计方法学</a></h1>
 
-
-
-
-
-
-
-
-<h3>导航</h3>
-<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">前言</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">前言</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="To_Do.html">To do</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5.html">基本概念</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html">时钟信号</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9F.html">设计约束</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Design Flow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#implementation">Implementation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verification">Verification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#optimization">Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html">物理设计数据文件格式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%82%E8%80%83.html">参考</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html#id1">参考</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
@@ -86,53 +120,137 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter13/index.html">可靠性分析</a></li>
 </ul>
 
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">前言</a><ul>
-      <li>Previous: <a href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html" title="上一章">设计约束文件格式 <code class="docutils literal notranslate"><span class="pre">sdc</span></code></a></li>
-      <li>Next: <a href="%E5%8F%82%E8%80%83.html" title="下一章">参考</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">VLSI物理设计方法学</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">前言</a> &raquo;</li>
+        
+      <li>Design Flow</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/chapter1/Design_Flow.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
 </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">快速搜索</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="转向" />
-    </form>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="design-flow">
+<h1>Design Flow<a class="headerlink" href="#design-flow" title="永久链接至标题">¶</a></h1>
+<div class="section" id="implementation">
+<h2>Implementation<a class="headerlink" href="#implementation" title="永久链接至标题">¶</a></h2>
+<p><a class="reference internal" href="../chapter4/index.html"><span class="doc">Synthesis</span></a> -&gt; <a class="reference internal" href="../chapter5/index.html"><span class="doc">Floorplanning</span></a> -&gt; <a class="reference internal" href="../chapter6/index.html"><span class="doc">Placement</span></a> -&gt; <a class="reference internal" href="../chapter7/index.html"><span class="doc">CTS</span></a> -&gt; <a class="reference internal" href="../chapter8/index.html"><span class="doc">Routing</span></a></p>
+<p>从布图规划开始，到电源规划到完成布局，每一步规划不仅仅要考虑布线的实现，还要在布局完成之后时提供好的数据环境，供时钟树综合使用</p>
+</div>
+<div class="section" id="verification">
+<h2>Verification<a class="headerlink" href="#verification" title="永久链接至标题">¶</a></h2>
+<p>通过 <a class="reference internal" href="../chapter9/index.html"><span class="doc">寄生参数提取</span></a> 提取布线后寄生参数，最终转化为 <cite>sdf</cite> 文件，进行 post-layout gate level simulation 、 <a class="reference internal" href="../chapter10/index.html"><span class="doc">静态时序分析</span></a></p>
+<p>纳米节点下集成电路的时序分析离不开考虑电源的影响，要预先或同时考虑 <a class="reference internal" href="../chapter11/index.html"><span class="doc">功耗分析</span></a>;同时需要考虑噪声对时序的影响，故要预先或同时考虑 <a class="reference internal" href="../chapter12/index.html"><span class="doc">信号完整性分析</span></a> 的相互牵制关系</p>
+</div>
+<div class="section" id="optimization">
+<h2>Optimization<a class="headerlink" href="#optimization" title="永久链接至标题">¶</a></h2>
+<p>时序优化以修复时序违例</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html" class="btn btn-neutral float-right" title="物理设计数据文件格式" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html" class="btn btn-neutral float-left" title="设计约束文件格式 sdc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
 
+  <hr/>
 
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, QIAMKING.
 
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
-
-
-
-
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="footer">
-      &copy;2021, QIAMKING.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.1.2</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="../_sources/chapter1/Design_Flow.rst.txt"
-          rel="nofollow">Page source</a>
-    </div>
 
-    
+    </section>
 
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
     
-  </body>
+   
+
+</body>
 </html>

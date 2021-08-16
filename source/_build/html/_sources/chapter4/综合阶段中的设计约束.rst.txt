@@ -52,16 +52,24 @@ Optimization constraints apply to the design on which you are working for the du
 Timing constraints (performance and speed)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Input and output delays (synchronous paths)
-- Minimum and maximum delay (asynchronous paths)
+- 针对同步时序路径：Input and output delays (synchronous paths)
+- 针对异步时序路径：Minimum and maximum delay (asynchronous paths)
 
 
 Maximum area (number of gates)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-面积约束
+**Maximum area** ：
+    Maximum area represents the number of gates in the design, not the physical area the design occupies. 
+
+
+Usually the area requirements for the design are stated as the smallest design that meets the performance goal. Defining a maximum area directs Design Compiler to optimize the design for area after timing
+optimization is complete.
 
 功耗约束
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-If you use the **Power Compiler** tool from Synopsys,  ``max_dynamic_power`` and ``max_leakage_power`` are optimization constraints. 
+If you use the **Power Compiler** tool from Synopsys,  ``max_dynamic_power`` and ``max_leakage_power`` are optimization constraints.
+
+Propagating Constraints in Hierarchical Designs
+------------------------------------------------
