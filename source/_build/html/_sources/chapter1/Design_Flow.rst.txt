@@ -13,7 +13,7 @@ Verification
 --------------------------
 
 功能验证
-----------------------
+^^^^^^^^^^^^^^^^^^^
 
 functional verification & formal verification
 
@@ -26,6 +26,24 @@ functional verification & formal verification
 纳米节点下集成电路的时序分析离不开考虑电源的影响，要预先或同时考虑 :doc:`/chapter11/index`;同时需要考虑噪声对时序的影响，故要预先或同时考虑 :doc:`/chapter12/index` 的相互牵制关系
 
 logic simulation
+
+面积
+^^^^^^^^^^^^^^^^^^^
+
+拥堵
+^^^^^^^^^^^^^^^^^^^
+
+Designs are considered **congested** when the wires needed to connect design components
+become greater than the space available to put the wires.
+
+功耗
+^^^^^^^^^^^^^^^^^^^
+
+信号完整性
+^^^^^^^^^^^^^^^^^^^
+
+可靠性
+^^^^^^^^^^^^^^^^^^^
 
 Optimization
 -----------------------------

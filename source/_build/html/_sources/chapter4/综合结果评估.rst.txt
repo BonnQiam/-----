@@ -144,7 +144,7 @@ Although ``Design Compiler`` has its own **built-in static timing analysis capab
 routing congestion
 ^^^^^^^^^^^^^^^^^^^^^^
 
-
+To report details about congestion, use the ``report_congestion`` and the ``report_congestion_options`` commands. 
 
 功耗
 ^^^^^^^^^^^^^^^^^^^^^^^
