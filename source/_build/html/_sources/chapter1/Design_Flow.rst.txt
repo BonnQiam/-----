@@ -12,14 +12,20 @@ Implementation
 Verification
 --------------------------
 
-formal verification
+功能验证
+----------------------
 
-logic simulation
+functional verification & formal verification
+
+时序
+^^^^^^^^^^^^^^^
 
 通过 :doc:`/chapter9/index` 提取布线后寄生参数，最终转化为 `sdf` 文件，进行 post-layout gate level simulation 、 :doc:`/chapter10/index`
 
 
 纳米节点下集成电路的时序分析离不开考虑电源的影响，要预先或同时考虑 :doc:`/chapter11/index`;同时需要考虑噪声对时序的影响，故要预先或同时考虑 :doc:`/chapter12/index` 的相互牵制关系
+
+logic simulation
 
 Optimization
 -----------------------------
