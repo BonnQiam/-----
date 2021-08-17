@@ -39,6 +39,8 @@ You can make these constraints **more restrictive** than optimization constraint
 | ``set_min_capacitance``  | Input ports            |
 +--------------------------+------------------------+
 
+查看现有约束：After producing the initial mapped netlist, use the  ``report_constraint`` command to check your design’s performance.
+
 Optimization constraints
 -------------------------------
 

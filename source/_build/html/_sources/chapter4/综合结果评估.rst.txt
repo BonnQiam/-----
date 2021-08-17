@@ -1,22 +1,153 @@
 综合结果评估（Analyze）
 ==========================
 
-
 基于报告的指标分析
 ----------------------
 
-综合后可以输出多种结果报告，最常用的是：
+以 design compiler 为例，利用其内置的分析工具对综合结果的评估，输出相应的结果报告，最常用的是：
 
-- 时序/延迟报告，分析时序约束为例
-- 面积报告
-- 功耗报告
+design problem
+^^^^^^^^^^^^^^^^^^^^
 
+即对进行综合的设计方案进行分析
+
++------------+------------------------------+----------------------------------------+
+|   Object   |     Command Description      |                                        |
++============+==============================+========================================+
+| Design     | ``report_design``            | Reports design characteristics         |
++------------+------------------------------+----------------------------------------+
+|            | ``report_area``              | Reports design size and object counts  |
++------------+------------------------------+----------------------------------------+
+|            | ``report_hierarchy``         | Reports design hierarchy               |
++------------+------------------------------+----------------------------------------+
+|            | ``report_resources``         | Reports resource implementations       |
++------------+------------------------------+----------------------------------------+
+| Instances  | ``report_cell``              | Displays information about instances   |
++------------+------------------------------+----------------------------------------+
+| References | ``report_reference``         | Displays information about references  |
++------------+------------------------------+----------------------------------------+
+| Pins       | ``report_transitive_fanin``  | Reports fanin logic                    |
++------------+------------------------------+----------------------------------------+
+|            | ``report_transitive_fanout`` | Reports fanout logic                   |
++------------+------------------------------+----------------------------------------+
+| Ports      | ``report_port``              | Displays information about ports       |
++------------+------------------------------+----------------------------------------+
+|            | ``report_bus``               | Displays information about bused ports |
++------------+------------------------------+----------------------------------------+
+|            | ``report_transitive_fanin``  | Reports fanin logic                    |
++------------+------------------------------+----------------------------------------+
+|            | ``report_transitive_fanout`` | Reports fanout logic                   |
++------------+------------------------------+----------------------------------------+
+| Nets       | ``report_net``               | Reports net characteristics            |
++------------+------------------------------+----------------------------------------+
+|            | ``report_bus``               | Reports bused net characteristics      |
++------------+------------------------------+----------------------------------------+
+|            | ``report_transitive_fanin``  | Reports fanin logic                    |
++------------+------------------------------+----------------------------------------+
+|            | ``report_transitive_fanout`` | Reports fanout logic                   |
++------------+------------------------------+----------------------------------------+
+| Clocks     | ``report_clock``             | Displays information about clocks      |
++------------+------------------------------+----------------------------------------+
+
+面积
+^^^^^^^^^^^^^^^^^
+
+.. note::
+    Use the ``report_area`` command to display area information and statistics for the current design or instance. Use the ``-hierarchy`` option to report area used by cells across the hierarchy
+
+The command reports combinational, on-combinational, and total area.
+
+If you have set the current instance, the report is generated for the design of that instance;
+otherwise, the report is generated for the current design. 
+
+e.g.
+
+.. code-block:: console
+
+    dc_shell > report_area
+    ****************************************
+    Report : area
+    Design : TEST_TOP
+    Version: E-2010.12
+    Date : Sun Oct 24 02:08:37 2010
+    ****************************************
+    Library(s) Used:
+    test_lib (File: test_lib.db)
+    Number of ports: 565
+    Number of nets: 9654
+    Number of cells: 8120
+    Number of combinational cells: 6594
+    Number of sequential cells: 1526
+    Number of macros: 0
+    Number of buf/inv: 1439
+    Number of references: 163
+    Combinational area: 562404.432061
+    Noncombinational area: 6720840.351067
+    Net Interconnect area: undefined (Wire load has zero net area)
+    Total cell area: 7283244.783128
+    Total area: undefined
+
+
+时序
+^^^^^^^^^^^^^^^^^^
+
+在进行时序分析之前，为了保证我们所做的工作是有意义的，因此需要保证如下前置工作已经完成或进行（ Before you begin debugging timing problems, verify that your design meets the following requirements）:
+
+- You have defined the **operating conditions**
+- You have specified **realistic constraints**
+- You have appropriately **budgeted the timing constraints**
+- You have properly **constrained the paths**
+- You have described the **clock skew**
+
+If your design does not meet these requirements, make sure it does before you proceed
+
+
+Use the ``report_timing`` command to generate timing reports for the current design or the current instance. 
+
+By default, the command lists **the full path of the longest maximum delay timing path** for each path group. 
+
+.. warning::
+    关于 path group —— Design Compiler **groups paths based on the clock controlling the endpoint** . All paths not associated with a clock are in the **default path group**.
+    
+    You can also create path groups by using the ``group_path`` command.
 
 此时的时序分析是针对对芯片的时序进行理想情况下的 **零线负载模式** （zero WLM / Wire-Load Model）进行的延迟分析，从而验证综合后的网表是否具有较好的时序
+
++--------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+|            Command             |                                                Analysis task description                                                 |
++================================+==========================================================================================================================+
+| ``report_design``              | Shows operating conditions, wire load model and mode, timing ranges, internal input and output, and disabled timing arcs |
++--------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``check_timing``               | Checks for unconstrained timing paths and clock-gating logic                                                             |
++--------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``report_port``                | Shows unconstrained input and output ports and port loading                                                              |
++--------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``report_timing_requirements`` | Shows all timing exceptions set on the design                                                                            |
++--------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``report_clock``               | Checks the clock definition and clock skew information                                                                   |
++--------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``report_path_group``          | Shows all timing path groups in the design                                                                               |
++--------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``report_timing``              | Checks the timing of the design                                                                                          |
++--------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``report_constraint``          | Checks the design constraints                                                                                            |
++--------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+| ``report_delay_calculation``   | Reports the details of a delay arc calculation                                                                           |
++--------------------------------+--------------------------------------------------------------------------------------------------------------------------+
+
+
 
 P.S.  DC自身的时序分析与PT的时序分析的区别
 
 Although ``Design Compiler`` has its own **built-in static timing analysis capability** , ``PrimeTime`` has better speed, capacity, and flexibility for static timing analysis, and **offers many features not supported** by Design Compiler such as timing models, mode analysis, and internal clocks.
+
+routing congestion
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+功耗
+^^^^^^^^^^^^^^^^^^^^^^^
 
 综合后门级仿真
 --------------------------

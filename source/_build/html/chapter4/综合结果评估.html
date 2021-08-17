@@ -97,8 +97,15 @@
 <li class="toctree-l2"><a class="reference internal" href="%E5%AE%9A%E4%B9%89%E8%AE%BE%E8%AE%A1%E7%8E%AF%E5%A2%83.html">定义设计环境</a></li>
 <li class="toctree-l2"><a class="reference internal" href="%E7%BB%BC%E5%90%88%E9%98%B6%E6%AE%B5%E4%B8%AD%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9F.html">综合阶段中的设计约束</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">综合结果评估（Analyze）</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">基于报告的指标分析</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">综合后门级仿真</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">基于报告的指标分析</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#design-problem">design problem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">面积</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">时序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#routing-congestion">routing congestion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">功耗</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">综合后门级仿真</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="index.html#id1">参考</a></li>
@@ -186,18 +193,200 @@
 <h1>综合结果评估（Analyze）<a class="headerlink" href="#analyze" title="永久链接至标题">¶</a></h1>
 <div class="section" id="id1">
 <h2>基于报告的指标分析<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
-<p>综合后可以输出多种结果报告，最常用的是：</p>
+<p>以 design compiler 为例，利用其内置的分析工具对综合结果的评估，输出相应的结果报告，最常用的是：</p>
+<div class="section" id="design-problem">
+<h3>design problem<a class="headerlink" href="#design-problem" title="永久链接至标题">¶</a></h3>
+<p>即对进行综合的设计方案进行分析</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 37%" />
+<col style="width: 49%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Object</p></th>
+<th class="head"><p>Command Description</p></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Design</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_design</span></code></p></td>
+<td><p>Reports design characteristics</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_area</span></code></p></td>
+<td><p>Reports design size and object counts</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_hierarchy</span></code></p></td>
+<td><p>Reports design hierarchy</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_resources</span></code></p></td>
+<td><p>Reports resource implementations</p></td>
+</tr>
+<tr class="row-even"><td><p>Instances</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_cell</span></code></p></td>
+<td><p>Displays information about instances</p></td>
+</tr>
+<tr class="row-odd"><td><p>References</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_reference</span></code></p></td>
+<td><p>Displays information about references</p></td>
+</tr>
+<tr class="row-even"><td><p>Pins</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_transitive_fanin</span></code></p></td>
+<td><p>Reports fanin logic</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_transitive_fanout</span></code></p></td>
+<td><p>Reports fanout logic</p></td>
+</tr>
+<tr class="row-even"><td><p>Ports</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_port</span></code></p></td>
+<td><p>Displays information about ports</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_bus</span></code></p></td>
+<td><p>Displays information about bused ports</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_transitive_fanin</span></code></p></td>
+<td><p>Reports fanin logic</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_transitive_fanout</span></code></p></td>
+<td><p>Reports fanout logic</p></td>
+</tr>
+<tr class="row-even"><td><p>Nets</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_net</span></code></p></td>
+<td><p>Reports net characteristics</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_bus</span></code></p></td>
+<td><p>Reports bused net characteristics</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_transitive_fanin</span></code></p></td>
+<td><p>Reports fanin logic</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_transitive_fanout</span></code></p></td>
+<td><p>Reports fanout logic</p></td>
+</tr>
+<tr class="row-even"><td><p>Clocks</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">report_clock</span></code></p></td>
+<td><p>Displays information about clocks</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id2">
+<h3>面积<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">report_area</span></code> command to display area information and statistics for the current design or instance. Use the <code class="docutils literal notranslate"><span class="pre">-hierarchy</span></code> option to report area used by cells across the hierarchy</p>
+</div>
+<p>The command reports combinational, on-combinational, and total area.</p>
+<p>If you have set the current instance, the report is generated for the design of that instance;
+otherwise, the report is generated for the current design.</p>
+<p>e.g.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">dc_shell &gt; report_area</span>
+<span class="go">****************************************</span>
+<span class="go">Report : area</span>
+<span class="go">Design : TEST_TOP</span>
+<span class="go">Version: E-2010.12</span>
+<span class="go">Date : Sun Oct 24 02:08:37 2010</span>
+<span class="go">****************************************</span>
+<span class="go">Library(s) Used:</span>
+<span class="go">test_lib (File: test_lib.db)</span>
+<span class="go">Number of ports: 565</span>
+<span class="go">Number of nets: 9654</span>
+<span class="go">Number of cells: 8120</span>
+<span class="go">Number of combinational cells: 6594</span>
+<span class="go">Number of sequential cells: 1526</span>
+<span class="go">Number of macros: 0</span>
+<span class="go">Number of buf/inv: 1439</span>
+<span class="go">Number of references: 163</span>
+<span class="go">Combinational area: 562404.432061</span>
+<span class="go">Noncombinational area: 6720840.351067</span>
+<span class="go">Net Interconnect area: undefined (Wire load has zero net area)</span>
+<span class="go">Total cell area: 7283244.783128</span>
+<span class="go">Total area: undefined</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>时序<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<p>在进行时序分析之前，为了保证我们所做的工作是有意义的，因此需要保证如下前置工作已经完成或进行（ Before you begin debugging timing problems, verify that your design meets the following requirements）:</p>
 <ul class="simple">
-<li><p>时序/延迟报告，分析时序约束为例</p></li>
-<li><p>面积报告</p></li>
-<li><p>功耗报告</p></li>
+<li><p>You have defined the <strong>operating conditions</strong></p></li>
+<li><p>You have specified <strong>realistic constraints</strong></p></li>
+<li><p>You have appropriately <strong>budgeted the timing constraints</strong></p></li>
+<li><p>You have properly <strong>constrained the paths</strong></p></li>
+<li><p>You have described the <strong>clock skew</strong></p></li>
 </ul>
+<p>If your design does not meet these requirements, make sure it does before you proceed</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">report_timing</span></code> command to generate timing reports for the current design or the current instance.</p>
+<p>By default, the command lists <strong>the full path of the longest maximum delay timing path</strong> for each path group.</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>关于 path group —— Design Compiler <strong>groups paths based on the clock controlling the endpoint</strong> . All paths not associated with a clock are in the <strong>default path group</strong>.</p>
+<p>You can also create path groups by using the <code class="docutils literal notranslate"><span class="pre">group_path</span></code> command.</p>
+</div>
 <p>此时的时序分析是针对对芯片的时序进行理想情况下的 <strong>零线负载模式</strong> （zero WLM / Wire-Load Model）进行的延迟分析，从而验证综合后的网表是否具有较好的时序</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 79%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Command</p></th>
+<th class="head"><p>Analysis task description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">report_design</span></code></p></td>
+<td><p>Shows operating conditions, wire load model and mode, timing ranges, internal input and output, and disabled timing arcs</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">check_timing</span></code></p></td>
+<td><p>Checks for unconstrained timing paths and clock-gating logic</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">report_port</span></code></p></td>
+<td><p>Shows unconstrained input and output ports and port loading</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">report_timing_requirements</span></code></p></td>
+<td><p>Shows all timing exceptions set on the design</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">report_clock</span></code></p></td>
+<td><p>Checks the clock definition and clock skew information</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">report_path_group</span></code></p></td>
+<td><p>Shows all timing path groups in the design</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">report_timing</span></code></p></td>
+<td><p>Checks the timing of the design</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">report_constraint</span></code></p></td>
+<td><p>Checks the design constraints</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">report_delay_calculation</span></code></p></td>
+<td><p>Reports the details of a delay arc calculation</p></td>
+</tr>
+</tbody>
+</table>
 <p>P.S.  DC自身的时序分析与PT的时序分析的区别</p>
 <p>Although <code class="docutils literal notranslate"><span class="pre">Design</span> <span class="pre">Compiler</span></code> has its own <strong>built-in static timing analysis capability</strong> , <code class="docutils literal notranslate"><span class="pre">PrimeTime</span></code> has better speed, capacity, and flexibility for static timing analysis, and <strong>offers many features not supported</strong> by Design Compiler such as timing models, mode analysis, and internal clocks.</p>
 </div>
-<div class="section" id="id2">
-<h2>综合后门级仿真<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="routing-congestion">
+<h3>routing congestion<a class="headerlink" href="#routing-congestion" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id4">
+<h3>功耗<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>综合后门级仿真<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
 </div>
 </div>
 
