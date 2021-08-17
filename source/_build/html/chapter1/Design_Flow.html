@@ -42,7 +42,7 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="物理设计数据文件格式" href="%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html" />
+    <link rel="next" title="Example：PrimeTime Suite" href="PrimeTime_Suite.html" />
     <link rel="prev" title="设计约束文件格式 sdc" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html" /> 
 </head>
 
@@ -99,6 +99,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#implementation">Implementation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#verification">Verification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#optimization">Optimization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">工具链</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="PrimeTime_Suite.html">Example：PrimeTime Suite</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html">物理设计数据文件格式</a></li>
@@ -108,7 +112,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html#id1">参考</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
@@ -196,12 +199,29 @@
 </div>
 <div class="section" id="verification">
 <h2>Verification<a class="headerlink" href="#verification" title="永久链接至标题">¶</a></h2>
+<p>formal verification</p>
+<p>logic simulation</p>
 <p>通过 <a class="reference internal" href="../chapter9/index.html"><span class="doc">寄生参数提取</span></a> 提取布线后寄生参数，最终转化为 <cite>sdf</cite> 文件，进行 post-layout gate level simulation 、 <a class="reference internal" href="../chapter10/index.html"><span class="doc">静态时序分析</span></a></p>
 <p>纳米节点下集成电路的时序分析离不开考虑电源的影响，要预先或同时考虑 <a class="reference internal" href="../chapter11/index.html"><span class="doc">功耗分析</span></a>;同时需要考虑噪声对时序的影响，故要预先或同时考虑 <a class="reference internal" href="../chapter12/index.html"><span class="doc">信号完整性分析</span></a> 的相互牵制关系</p>
 </div>
 <div class="section" id="optimization">
 <h2>Optimization<a class="headerlink" href="#optimization" title="永久链接至标题">¶</a></h2>
 <p>时序优化以修复时序违例</p>
+</div>
+<div class="section" id="id1">
+<h2>工具链<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="PrimeTime_Suite.html">Example：PrimeTime Suite</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="PrimeTime_Suite.html#id1">静态时序分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrimeTime_Suite.html#primetime-px">PrimeTime PX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrimeTime_Suite.html#primetime-si">PrimeTime SI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="PrimeTime_Suite.html#primetime-vx">PrimeTime VX</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -211,7 +231,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html" class="btn btn-neutral float-right" title="物理设计数据文件格式" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="PrimeTime_Suite.html" class="btn btn-neutral float-right" title="Example：PrimeTime Suite" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html" class="btn btn-neutral float-left" title="设计约束文件格式 sdc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

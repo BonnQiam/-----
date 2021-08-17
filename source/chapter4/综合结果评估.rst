@@ -14,6 +14,9 @@
 
 此时的时序分析是针对对芯片的时序进行理想情况下的 **零线负载模式** （zero WLM / Wire-Load Model）进行的延迟分析，从而验证综合后的网表是否具有较好的时序
 
+P.S.  DC自身的时序分析与PT的时序分析的区别
+
+Although ``Design Compiler`` has its own **built-in static timing analysis capability** , ``PrimeTime`` has better speed, capacity, and flexibility for static timing analysis, and **offers many features not supported** by Design Compiler such as timing models, mode analysis, and internal clocks.
 
 综合后门级仿真
 --------------------------
