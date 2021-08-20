@@ -1,5 +1,5 @@
-Example：PrimeTime Suite
-==================================
+Example：PrimeTime Suite + PrimeRial
+========================================
 ``PrimeTime Suite`` 提供了静态时序分析、功耗分析、功耗分析、信号完整性分析、process parameters 的统计偏差等多方面的分析
 
 静态时序分析
@@ -7,7 +7,17 @@ Example：PrimeTime Suite
 
 .. figure:: ./静态时序分析.png
 
-PrimeTime PX
+PrimeTime VX
+^^^^^^^^^^^^^^^^^^^^
+
+``PrimeTime VX`` is a PrimeTime add-on feature that increases the accuracy of timing analysis by **considering the statistical variation and distribution of process parameters**.
+
+``PrimeTime VX`` accurately determines the timing behavior of a circuit under varying parameters such as channel length, threshold voltage, and interconnect wire thickness.
+
+Given a set of **variation-aware cell libraries and interconnect data**, PrimeTime VX analyzes path timing behavior under all combinations of parameter variations
+
+
+功耗分析：PrimeTime PX
 ----------------------
 
 ``PrimeTime PX`` is a PrimeTime add-on feature that accurately **analyzes full-chip power dissipation of cell-based designs** 
@@ -15,18 +25,13 @@ PrimeTime PX
 - It provides vector-free and vector-based peak power and average power analysis. 
 - The vectors to PrimeTime PX are either RTL or gate-level simulation results in Value Change Dump (VCD) format or Switching Activity Interchange Format (SAIF)
 
-PrimeTime SI
+信号完整性分析：PrimeTime SI
 ----------------------
 ``PrimeTime SI`` (signal integrity) is a PrimeTime add-on feature that **adds crosstalk analysis capabilities** to PrimeTime static timing analyzer.
 
 .. note::
     ``PrimeTime SI`` calculates the timing effects of cross-coupled capacitors between nets and includes the resulting delay changes in the PrimeTime analysis reports. It also calculates the logic effects of crosstalk noise and reports conditions that could lead to functional failure.
 
-PrimeTime VX
------------------------
 
-``PrimeTime VX`` is a PrimeTime add-on feature that increases the accuracy of timing analysis by **considering the statistical variation and distribution of process parameters**.
-
-``PrimeTime VX`` accurately determines the timing behavior of a circuit under varying parameters such as channel length, threshold voltage, and interconnect wire thickness.
-
-Given a set of **variation-aware cell libraries and interconnect data**, PrimeTime VX analyzes path timing behavior under all combinations of parameter variations
+PrimeRial
+=======================

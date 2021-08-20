@@ -206,15 +206,15 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">注解</p>
-<p>上述工作即为设置管脚约束的 <cite>tdf</cite> 文件了，它指定了每个 IO cell 在整个芯片中的位置和排列顺序 —— 对于 Chip level 的设计而言，该文件主要用来定义设计中所有 IO 以及 IO Corner 的位置（上下左右的方位以及排列顺序，也可以定义具体的坐标）</p>
-<p>如果是 Block Level的设计而言，因为设计中没有IO cell，所以可以读入pin顺序和位置的 <cite>tdf</cite> 文件 —— 对于Block level的设计而言，它用来指定所有pin的位置和所用的metal的层次。</p>
+<p>上述工作即为设置管脚约束的 <code class="docutils literal notranslate"><span class="pre">tdf</span></code> 文件了，它指定了每个 IO cell 在整个芯片中的位置和排列顺序 —— 对于 Chip level 的设计而言，该文件主要用来定义设计中所有 IO 以及 IO Corner 的位置（上下左右的方位以及排列顺序，也可以定义具体的坐标）</p>
+<p>如果是 Block Level的设计而言，因为设计中没有IO cell，所以可以读入pin顺序和位置的 <code class="docutils literal notranslate"><span class="pre">tdf</span></code> 文件 —— 对于Block level的设计而言，它用来指定所有pin的位置和所用的metal的层次。</p>
 </div>
 <p>之后在执行</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">$ </span>initialize_floorplan
 </pre></div>
 </div>
-<p>在读入管脚约束文件（ <cite>.tdf</cite> 文件）后，可以创建Floorplan得到芯片大概的物理形状和尺寸，在这一步执行完毕之后，IO pad cell 或者 pin 就会按照前面的约束进行摆放。</p>
-<p>P.S. The <em>`initialize_floorplan`</em> command places constrained pads first. Any unconstrained pads are placed next, using any available pad location. The tool does not place unconstrained pads between consecutively ordered constrained pads</p>
+<p>在读入管脚约束文件（ <code class="docutils literal notranslate"><span class="pre">.tdf</span></code> 文件）后，可以创建Floorplan得到芯片大概的物理形状和尺寸，在这一步执行完毕之后，IO pad cell 或者 pin 就会按照前面的约束进行摆放。</p>
+<p>P.S. The <code class="docutils literal notranslate"><span class="pre">initialize_floorplan</span></code> command places constrained pads first. Any unconstrained pads are placed next, using any available pad location. The tool does not place unconstrained pads between consecutively ordered constrained pads</p>
 <div class="figure align-default">
 <img alt="../_images/pad_placement.png" src="../_images/pad_placement.png" />
 </div>

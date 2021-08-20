@@ -60,5 +60,5 @@ Optimization
     :maxdepth: 3
     :caption: Contents:
 
-    ./PrimeTime_Suite.rst
+    ./PrimeTime_Suite+PrimeRail.rst
     ./Prime_Rail.rst

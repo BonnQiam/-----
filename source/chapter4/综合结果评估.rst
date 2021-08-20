@@ -65,11 +65,14 @@ e.g.
 .. code-block:: console
 
     dc_shell > report_area
+
     ****************************************
+    
     Report : area
     Design : TEST_TOP
     Version: E-2010.12
     Date : Sun Oct 24 02:08:37 2010
+
     ****************************************
     Library(s) Used:
     test_lib (File: test_lib.db)

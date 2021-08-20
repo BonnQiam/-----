@@ -101,7 +101,6 @@
 <li class="toctree-l3"><a class="reference internal" href="Design_Flow.html#optimization">Optimization</a></li>
 <li class="toctree-l3 current"><a class="reference internal" href="Design_Flow.html#id8">工具链</a><ul class="current">
 <li class="toctree-l4 current"><a class="current reference internal" href="#">Example：PrimeTime Suite + PrimeRial</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#primerial">PrimeRial</a></li>
 </ul>
 </li>
 </ul>
@@ -180,7 +179,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/chapter1/PrimeTime_Suite.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/chapter1/PrimeTime_Suite+PrimeRail.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -213,8 +212,11 @@
 <p><code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">PX</span></code> is a PrimeTime add-on feature that accurately <strong>analyzes full-chip power dissipation of cell-based designs</strong></p>
 <ul class="simple">
 <li><p>It provides vector-free and vector-based peak power and average power analysis.</p></li>
-<li><p>The vectors to PrimeTime PX are either RTL or gate-level simulation results in Value Change Dump (VCD) format or Switching Activity Interchange Format (SAIF)</p></li>
+<li><p>The vectors to PrimeTime PX are either RTL or gate-level simulation results in Value Change Dump ( <code class="docutils literal notranslate"><span class="pre">VCD</span></code> ) format or Switching Activity Interchange Format ( <code class="docutils literal notranslate"><span class="pre">SAIF</span></code> )</p></li>
 </ul>
+<div class="figure align-default">
+<img alt="../_images/功耗分析.png" src="../_images/功耗分析.png" />
+</div>
 </div>
 <div class="section" id="primetime-si">
 <h2>信号完整性分析：PrimeTime SI<a class="headerlink" href="#primetime-si" title="永久链接至标题">¶</a></h2>
@@ -223,10 +225,27 @@
 <p class="admonition-title">注解</p>
 <p><code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">SI</span></code> calculates the timing effects of cross-coupled capacitors between nets and includes the resulting delay changes in the PrimeTime analysis reports. It also calculates the logic effects of crosstalk noise and reports conditions that could lead to functional failure.</p>
 </div>
+<p>If you need to account for possible timing effects of crosstalk, using <code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">SI</span></code> is much easier, faster, and more thorough than using a circuit simulator such as SPICE.</p>
+<p>Instead of analyzing just a single path or a few paths for crosstalk effects, <code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">SI</span></code> lets you analyze the whole circuit using the familiar PrimeTime analysis flow</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>To use PrimeTime SI with PrimeTime, you only need to do the following additional steps:</p>
+<ul class="simple">
+<li><p>Enable PrimeTime SI by setting the <code class="docutils literal notranslate"><span class="pre">si_enable_analysis</span></code> variable to true.</p></li>
+<li><p><strong>Back-annotate</strong> the design with cross-coupling capacitor information, as specified in a Standard Parasitic Exchange Format ( <code class="docutils literal notranslate"><span class="pre">SPEF</span></code> ) file</p></li>
+<li><p>Specify the parameters that determine the accuracy and speed of the crosstalk analysis effort, such as the number of analysis iterations and the capacitance values that can be safely ignored.</p></li>
+</ul>
 </div>
+<p>在完成寄生参数提取之后，进行反标工作再进行信号完整性分析</p>
 </div>
 <div class="section" id="primerial">
-<h1>PrimeRial<a class="headerlink" href="#primerial" title="永久链接至标题">¶</a></h1>
+<h2>PrimeRial<a class="headerlink" href="#primerial" title="永久链接至标题">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">PrimeRail</span></code> tool is the Synopsys next generation <strong>reliability</strong> tool that provides both <strong>time average and dynamic analysis capabilities in analyzing voltage (IR) drop or electromigration problems of the design</strong> .</p>
+<p>The PrimeRail tool enables you to locate and eliminate possible voltage drop and electromigration violations for system-on-chip (SoC) designs. No matter what type of design it is, PrimeRail can provide accurate power rail analysis results with sign-off quality</p>
+<div class="figure align-default">
+<img alt="../_images/可靠性分析.png" src="../_images/可靠性分析.png" />
+</div>
+</div>
 </div>
 
 

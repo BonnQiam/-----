@@ -21,10 +21,10 @@ Floorplanning
 .. note::
     在正式开始 Floorplanning 之前，还有两项预备工作，分别是 
     
-    （1）  `Connecting Power and Ground Ports` ：create logical connections between power
+    （1）  **Connecting Power and Ground Ports** ：create logical connections between power
     and ground pins on standard cells and macros and the power and ground nets in the design
     
-    （2） 产生设计中原本不存在但是物理实现必要的单元 `Adding Power, Ground, and Corner Cells`：Physical-only cells for power, ground, and corner placement might not be part of the
+    （2） 产生设计中原本不存在但是物理实现必要的单元 **Adding Power, Ground, and Corner Cells** ：Physical-only cells for power, ground, and corner placement might not be part of the
     synthesized netlist and must be added to design.
 
 
