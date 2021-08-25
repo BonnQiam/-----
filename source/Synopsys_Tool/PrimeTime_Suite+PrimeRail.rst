@@ -1,4 +1,4 @@
-Example：PrimeTime Suite + PrimeRial
+PrimeTime Suite + PrimeRial
 ========================================
 ``PrimeTime Suite`` 提供了静态时序分析、功耗分析、功耗分析、信号完整性分析、process parameters 的统计偏差等多方面的分析
 

@@ -4,7 +4,8 @@ Synthesis
 .. toctree::
     :maxdepth: 2
     :caption: Contents:
-
+    
+    ./综合过程与算法.rst
     ./定义设计环境.rst
     ./综合阶段中的设计约束.rst
     ./综合结果评估.rst

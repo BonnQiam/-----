@@ -1,0 +1,271 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>PrimeTime Suite + PrimeRial &mdash; VLSI物理设计方法学 V0.1 文档</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> VLSI物理设计方法学
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../chapter1/index.html">前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter2/index.html">Library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter3/index.html">Partitioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter4/index.html">Synthesis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter6/index.html">Placement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter7/index.html">CTS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter8/index.html">Routing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter9/index.html">寄生参数提取</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter10/index.html">静态时序分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter11/index.html">功耗分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter12/index.html">信号完整性分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../chapter13/index.html">可靠性分析</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">VLSI物理设计方法学</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>PrimeTime Suite + PrimeRial</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/Synopsys_Tool/PrimeTime_Suite+PrimeRail.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="primetime-suite-primerial">
+<h1>PrimeTime Suite + PrimeRial<a class="headerlink" href="#primetime-suite-primerial" title="永久链接至标题">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">Suite</span></code> 提供了静态时序分析、功耗分析、功耗分析、信号完整性分析、process parameters 的统计偏差等多方面的分析</p>
+<div class="section" id="id1">
+<h2>静态时序分析<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
+<div class="figure align-default">
+<img alt="../_images/静态时序分析.png" src="../_images/静态时序分析.png" />
+</div>
+<div class="section" id="primetime-vx">
+<h3>PrimeTime VX<a class="headerlink" href="#primetime-vx" title="永久链接至标题">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">VX</span></code> is a PrimeTime add-on feature that increases the accuracy of timing analysis by <strong>considering the statistical variation and distribution of process parameters</strong>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">VX</span></code> accurately determines the timing behavior of a circuit under varying parameters such as channel length, threshold voltage, and interconnect wire thickness.</p>
+<p>Given a set of <strong>variation-aware cell libraries and interconnect data</strong>, PrimeTime VX analyzes path timing behavior under all combinations of parameter variations</p>
+</div>
+</div>
+<div class="section" id="primetime-px">
+<h2>功耗分析：PrimeTime PX<a class="headerlink" href="#primetime-px" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">PX</span></code> is a PrimeTime add-on feature that accurately <strong>analyzes full-chip power dissipation of cell-based designs</strong></p>
+<ul class="simple">
+<li><p>It provides vector-free and vector-based peak power and average power analysis.</p></li>
+<li><p>The vectors to PrimeTime PX are either RTL or gate-level simulation results in Value Change Dump ( <code class="docutils literal notranslate"><span class="pre">VCD</span></code> ) format or Switching Activity Interchange Format ( <code class="docutils literal notranslate"><span class="pre">SAIF</span></code> )</p></li>
+</ul>
+<div class="figure align-default">
+<img alt="../_images/功耗分析.png" src="../_images/功耗分析.png" />
+</div>
+</div>
+<div class="section" id="primetime-si">
+<h2>信号完整性分析：PrimeTime SI<a class="headerlink" href="#primetime-si" title="永久链接至标题">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">SI</span></code> (signal integrity) is a PrimeTime add-on feature that <strong>adds crosstalk analysis capabilities</strong> to PrimeTime static timing analyzer.</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p><code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">SI</span></code> calculates the timing effects of cross-coupled capacitors between nets and includes the resulting delay changes in the PrimeTime analysis reports. It also calculates the logic effects of crosstalk noise and reports conditions that could lead to functional failure.</p>
+</div>
+<p>If you need to account for possible timing effects of crosstalk, using <code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">SI</span></code> is much easier, faster, and more thorough than using a circuit simulator such as SPICE.</p>
+<p>Instead of analyzing just a single path or a few paths for crosstalk effects, <code class="docutils literal notranslate"><span class="pre">PrimeTime</span> <span class="pre">SI</span></code> lets you analyze the whole circuit using the familiar PrimeTime analysis flow</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>To use PrimeTime SI with PrimeTime, you only need to do the following additional steps:</p>
+<ul class="simple">
+<li><p>Enable PrimeTime SI by setting the <code class="docutils literal notranslate"><span class="pre">si_enable_analysis</span></code> variable to true.</p></li>
+<li><p><strong>Back-annotate</strong> the design with cross-coupling capacitor information, as specified in a Standard Parasitic Exchange Format ( <code class="docutils literal notranslate"><span class="pre">SPEF</span></code> ) file</p></li>
+<li><p>Specify the parameters that determine the accuracy and speed of the crosstalk analysis effort, such as the number of analysis iterations and the capacitance values that can be safely ignored.</p></li>
+</ul>
+</div>
+<p>在完成寄生参数提取之后，进行反标工作再进行信号完整性分析</p>
+</div>
+<div class="section" id="primerial">
+<h2>PrimeRial<a class="headerlink" href="#primerial" title="永久链接至标题">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">PrimeRail</span></code> tool is the Synopsys next generation <strong>reliability</strong> tool that provides both <strong>time average and dynamic analysis capabilities in analyzing voltage (IR) drop or electromigration problems of the design</strong> .</p>
+<p>The PrimeRail tool enables you to locate and eliminate possible voltage drop and electromigration violations for system-on-chip (SoC) designs. No matter what type of design it is, PrimeRail can provide accurate power rail analysis results with sign-off quality</p>
+<div class="figure align-default">
+<img alt="../_images/可靠性分析.png" src="../_images/可靠性分析.png" />
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; 版权所有 2021, QIAMKING.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

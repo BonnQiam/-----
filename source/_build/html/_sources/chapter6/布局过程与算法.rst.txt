@@ -1,6 +1,25 @@
 布局过程与算法
 =======================
 
+Unit Tile
+-----------------------
+
+Placement uses grid in which cells are placed
+
+.. figure:: ./unit_tile.png
+
+
+Floorplanning ``unit tile``  cell to build this grid
+
+.. note::
+
+    ``Unit tile`` is defined by a
+    library developer
+
+    All the cells in the library are
+    designed to be multiple to
+    ``unit tile``
+
 Global Placement
 ------------------------
 

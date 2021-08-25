@@ -1,0 +1,13 @@
+工具链
+===========
+
+The actions involved to design an IC circuit can be grouped in different categories according to their types as different types of activities require different EDA tools
+
+1. Synthesis tools —— increasing information about the design by providing more details (e.g. ``logic synthesis``,  ``physical synthesis`` )
+2. Analysis & Verification tools
+   
+   * collecting information on the quality of the design (e.g. ``timing analysis`` )
+   *  checking whether a synthesis step has left the specification intact (e.g., ``layout verification``).
+
+3. Optimization tools —— increasing the quality of the design by rearrangements in a given description (e.g., ``logic optimizer``,  ``timing optimizer``)
+4. Design management tools —— storage of design data, cooperation between tools, design flow, etc. (e.g., ``database``).

@@ -97,6 +97,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../chapter5/index.html">Floorplanning</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Placement</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">布局过程与算法</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unit-tile">Unit Tile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#global-placement">Global Placement</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#detailed-placement">Detailed Placement</a></li>
 </ul>
@@ -183,6 +184,22 @@
             
   <div class="section" id="id1">
 <h1>布局过程与算法<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="section" id="unit-tile">
+<h2>Unit Tile<a class="headerlink" href="#unit-tile" title="永久链接至标题">¶</a></h2>
+<p>Placement uses grid in which cells are placed</p>
+<div class="figure align-default">
+<img alt="../_images/unit_tile.png" src="../_images/unit_tile.png" />
+</div>
+<p>Floorplanning <code class="docutils literal notranslate"><span class="pre">unit</span> <span class="pre">tile</span></code>  cell to build this grid</p>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p><code class="docutils literal notranslate"><span class="pre">Unit</span> <span class="pre">tile</span></code> is defined by a
+library developer</p>
+<p>All the cells in the library are
+designed to be multiple to
+<code class="docutils literal notranslate"><span class="pre">unit</span> <span class="pre">tile</span></code></p>
+</div>
+</div>
 <div class="section" id="global-placement">
 <h2>Global Placement<a class="headerlink" href="#global-placement" title="永久链接至标题">¶</a></h2>
 </div>

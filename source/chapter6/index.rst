@@ -13,6 +13,9 @@ Placement is the process of placing standard cell in the design, The tool determ
 
 Placement will be driven by different criteria like **timing driven** ,  **congestion driven** and  **power optimization**
 
+.. warning::
+    The goal is to **minimize the total area and interconnect length**
+
 .. toctree::
     :maxdepth: 3
     :caption: Contents:

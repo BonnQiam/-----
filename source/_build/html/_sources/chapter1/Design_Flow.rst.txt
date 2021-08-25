@@ -1,64 +1,30 @@
 Design Flow
 ===========================
 
-Implementation
---------------------------
+Design process cycles between synthesis
+and verification
 
+.. figure:: ./cycle.png
 
-:doc:`/chapter4/index` -> :doc:`/chapter5/index` -> :doc:`/chapter6/index` -> :doc:`/chapter7/index` -> :doc:`/chapter8/index`
+下图展示了典型的 Synopsys 设计流程
 
-从布图规划开始，到电源规划到完成布局，每一步规划不仅仅要考虑布线的实现，还要在布局完成之后时提供好的数据环境，供时钟树综合使用
+.. figure:: ./design_flow.png
 
-Verification
---------------------------
+.. warning::
+    Concept-to-Silicon Design Flow
 
-功能验证
-^^^^^^^^^^^^^^^^^^^
+.. figure:: ./Concept-to-Silicon_Design_Flow.png
 
-functional verification & formal verification
+.. warning::
+    Detailed Digital Design IC Flow
 
-时序
-^^^^^^^^^^^^^^^
-
-通过 :doc:`/chapter9/index` 提取布线后寄生参数，最终转化为 `sdf` 文件，进行 post-layout gate level simulation 、 :doc:`/chapter10/index`
-
-
-纳米节点下集成电路的时序分析离不开考虑电源的影响，要预先或同时考虑 :doc:`/chapter11/index`;同时需要考虑噪声对时序的影响，故要预先或同时考虑 :doc:`/chapter12/index` 的相互牵制关系
-
-logic simulation
-
-面积
-^^^^^^^^^^^^^^^^^^^
-
-拥堵
-^^^^^^^^^^^^^^^^^^^
-
-Designs are considered **congested** when the wires needed to connect design components
-become greater than the space available to put the wires.
-
-功耗
-^^^^^^^^^^^^^^^^^^^
-
-信号完整性
-^^^^^^^^^^^^^^^^^^^
-
-可靠性
-^^^^^^^^^^^^^^^^^^^
-
-Optimization
------------------------------
-
-.. note::
-    
-
-时序优化以修复时序违例
-
-工具链
------------------------
+.. figure:: ./Detailed_Digital_Design_IC_Flow.png 
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 2
     :caption: Contents:
 
-    ./PrimeTime_Suite+PrimeRail.rst
-    ./Prime_Rail.rst
+    ./Implementation（Synthesis）.rst
+    ./Verification.rst
+    ./Optimization.rst
+    ./工具链.rst

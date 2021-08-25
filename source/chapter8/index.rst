@@ -11,3 +11,5 @@ Routing
 
 布线的内容是将分布在芯片核内的 Macro、标准单元、I/O pad cell 按照逻辑关系进行互连（百分之百地完成所有逻辑信号的正确互连），且满足设计约束条件
 
+.. warning::
+    The goal is minimal impact of interconnects on circuit operation

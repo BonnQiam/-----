@@ -42,7 +42,7 @@
     
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Example：PrimeTime Suite + PrimeRial" href="PrimeTime_Suite%2BPrimeRail.html" />
+    <link rel="next" title="Implementation（Synthesis）" href="Implementation%EF%BC%88Synthesis%EF%BC%89.html" />
     <link rel="prev" title="设计约束文件格式 sdc" href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html" /> 
 </head>
 
@@ -96,22 +96,10 @@
 <li class="toctree-l2"><a class="reference internal" href="%E6%97%B6%E9%92%9F%E4%BF%A1%E5%8F%B7.html">时钟信号</a></li>
 <li class="toctree-l2"><a class="reference internal" href="%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9F.html">设计约束</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Design Flow</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#implementation">Implementation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#verification">Verification</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id1">功能验证</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">时序</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">面积</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">拥堵</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">功耗</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">信号完整性</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">可靠性</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#optimization">Optimization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id8">工具链</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="PrimeTime_Suite%2BPrimeRail.html">Example：PrimeTime Suite + PrimeRial</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="Implementation%EF%BC%88Synthesis%EF%BC%89.html">Implementation（Synthesis）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Verification.html">Verification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Optimization.html">Optimization &amp; Trade-off</a></li>
+<li class="toctree-l3"><a class="reference internal" href="%E5%B7%A5%E5%85%B7%E9%93%BE.html">工具链</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="%E7%89%A9%E7%90%86%E8%AE%BE%E8%AE%A1%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.html">物理设计数据文件格式</a></li>
@@ -201,62 +189,49 @@
             
   <div class="section" id="design-flow">
 <h1>Design Flow<a class="headerlink" href="#design-flow" title="永久链接至标题">¶</a></h1>
-<div class="section" id="implementation">
-<h2>Implementation<a class="headerlink" href="#implementation" title="永久链接至标题">¶</a></h2>
-<p><a class="reference internal" href="../chapter4/index.html"><span class="doc">Synthesis</span></a> -&gt; <a class="reference internal" href="../chapter5/index.html"><span class="doc">Floorplanning</span></a> -&gt; <a class="reference internal" href="../chapter6/index.html"><span class="doc">Placement</span></a> -&gt; <a class="reference internal" href="../chapter7/index.html"><span class="doc">CTS</span></a> -&gt; <a class="reference internal" href="../chapter8/index.html"><span class="doc">Routing</span></a></p>
-<p>从布图规划开始，到电源规划到完成布局，每一步规划不仅仅要考虑布线的实现，还要在布局完成之后时提供好的数据环境，供时钟树综合使用</p>
+<p>Design process cycles between synthesis
+and verification</p>
+<div class="figure align-default">
+<img alt="../_images/cycle.png" src="../_images/cycle.png" />
 </div>
-<div class="section" id="verification">
-<h2>Verification<a class="headerlink" href="#verification" title="永久链接至标题">¶</a></h2>
-<div class="section" id="id1">
-<h3>功能验证<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
-<p>functional verification &amp; formal verification</p>
+<p>下图展示了典型的 Synopsys 设计流程</p>
+<div class="figure align-default">
+<img alt="../_images/design_flow.png" src="../_images/design_flow.png" />
 </div>
-<div class="section" id="id2">
-<h3>时序<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
-<p>通过 <a class="reference internal" href="../chapter9/index.html"><span class="doc">寄生参数提取</span></a> 提取布线后寄生参数，最终转化为 <cite>sdf</cite> 文件，进行 post-layout gate level simulation 、 <a class="reference internal" href="../chapter10/index.html"><span class="doc">静态时序分析</span></a></p>
-<p>纳米节点下集成电路的时序分析离不开考虑电源的影响，要预先或同时考虑 <a class="reference internal" href="../chapter11/index.html"><span class="doc">功耗分析</span></a>;同时需要考虑噪声对时序的影响，故要预先或同时考虑 <a class="reference internal" href="../chapter12/index.html"><span class="doc">信号完整性分析</span></a> 的相互牵制关系</p>
-<p>logic simulation</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>Concept-to-Silicon Design Flow</p>
 </div>
-<div class="section" id="id3">
-<h3>面积<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<div class="figure align-default">
+<img alt="../_images/Concept-to-Silicon_Design_Flow.png" src="../_images/Concept-to-Silicon_Design_Flow.png" />
 </div>
-<div class="section" id="id4">
-<h3>拥堵<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h3>
-<p>Designs are considered <strong>congested</strong> when the wires needed to connect design components
-become greater than the space available to put the wires.</p>
+<div class="admonition warning">
+<p class="admonition-title">警告</p>
+<p>Detailed Digital Design IC Flow</p>
 </div>
-<div class="section" id="id5">
-<h3>功耗<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<div class="figure align-default">
+<img alt="../_images/Detailed_Digital_Design_IC_Flow.png" src="../_images/Detailed_Digital_Design_IC_Flow.png" />
 </div>
-<div class="section" id="id6">
-<h3>信号完整性<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h3>
-</div>
-<div class="section" id="id7">
-<h3>可靠性<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h3>
-</div>
-</div>
-<div class="section" id="optimization">
-<h2>Optimization<a class="headerlink" href="#optimization" title="永久链接至标题">¶</a></h2>
-<p>时序优化以修复时序违例</p>
-</div>
-<div class="section" id="id8">
-<h2>工具链<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="PrimeTime_Suite%2BPrimeRail.html">Example：PrimeTime Suite + PrimeRial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="PrimeTime_Suite%2BPrimeRail.html#id1">静态时序分析</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="PrimeTime_Suite%2BPrimeRail.html#primetime-vx">PrimeTime VX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Implementation%EF%BC%88Synthesis%EF%BC%89.html">Implementation（Synthesis）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Implementation%EF%BC%88Synthesis%EF%BC%89.html#id1">物理综合</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="PrimeTime_Suite%2BPrimeRail.html#primetime-px">功耗分析：PrimeTime PX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="PrimeTime_Suite%2BPrimeRail.html#primetime-si">信号完整性分析：PrimeTime SI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="PrimeTime_Suite%2BPrimeRail.html#primerial">PrimeRial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Verification.html">Verification</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Verification.html#id1">功能验证</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Verification.html#id2">时序</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Verification.html#id3">面积</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Verification.html#id4">拥堵</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Verification.html#id5">功耗</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Verification.html#id6">信号完整性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Verification.html#id7">可靠性</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="Optimization.html">Optimization &amp; Trade-off</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E5%B7%A5%E5%85%B7%E9%93%BE.html">工具链</a></li>
 </ul>
-</div>
 </div>
 </div>
 
@@ -266,7 +241,7 @@ become greater than the space available to put the wires.</p>
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="PrimeTime_Suite%2BPrimeRail.html" class="btn btn-neutral float-right" title="Example：PrimeTime Suite + PrimeRial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Implementation%EF%BC%88Synthesis%EF%BC%89.html" class="btn btn-neutral float-right" title="Implementation（Synthesis）" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="%E6%A0%87%E5%87%86%E8%AE%BE%E8%AE%A1%E7%BA%A6%E6%9D%9Fsdc.html" class="btn btn-neutral float-left" title="设计约束文件格式 sdc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
