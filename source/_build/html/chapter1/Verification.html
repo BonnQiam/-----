@@ -99,12 +99,14 @@
 <li class="toctree-l3"><a class="reference internal" href="Implementation%EF%BC%88Synthesis%EF%BC%89.html">Implementation（Synthesis）</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Verification</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">功能验证</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id2">时序</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id3">面积</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">拥堵</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id5">功耗</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">信号完整性</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">可靠性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testing-dft">Testing(DFT)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#timingverification">时序 / TimingVerification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">面积</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">拥堵</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">功耗</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">信号完整性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">可靠性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#physical-verification">Physical Verification</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="Optimization.html">Optimization &amp; Trade-off</a></li>
@@ -200,7 +202,7 @@
             
   <div class="section" id="verification">
 <h1>Verification<a class="headerlink" href="#verification" title="永久链接至标题">¶</a></h1>
-<p>同样 verification 也是广义上的概念，其主要的做的是</p>
+<p>同样 verification 也是广义上的概念（更为准确点，应该称为 Validation ），其主要的做的是</p>
 <ul class="simple">
 <li><p>Simulate circuits (typically Spice or derivatives)</p>
 <ul>
@@ -225,30 +227,68 @@
 </ul>
 <div class="section" id="id1">
 <h2>功能验证<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
-<p>functional verification &amp; formal verification</p>
+<ul class="simple">
+<li><p>Simulation</p>
+<ul>
+<li><p>Cycle Based</p></li>
+<li><p>Event Driven</p></li>
+</ul>
+</li>
+<li><p>Formal Verification</p></li>
+<li><p>Code Coverage （Assertion Based）</p></li>
+<li><p>Analog Mixed Signal Simulation</p></li>
+</ul>
+<div class="section" id="prototyping">
+<h3>Prototyping<a class="headerlink" href="#prototyping" title="永久链接至标题">¶</a></h3>
+<p>Build the system on a bread-board to test. This is called bread-boarding</p>
+<p>Not feasible for large designs</p>
+<p>ASICs can also be verified by using programmable devices such as FPGAs. This is called <code class="docutils literal notranslate"><span class="pre">rapid</span> <span class="pre">system</span> <span class="pre">prototyping</span></code></p>
 </div>
-<div class="section" id="id2">
-<h2>时序<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="simulation">
+<h3>Simulation<a class="headerlink" href="#simulation" title="永久链接至标题">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Making a computer model for all modules</p></li>
+<li><p>Performing system level simulation</p></li>
+<li><p>Observing output signals to verify</p></li>
+<li><p>Testing cannot be exhaustive; only certain input patterns are checked Test vectors, test pattern generation</p></li>
+</ol>
+</div>
+<div class="section" id="formal-verification">
+<h3>Formal Verification<a class="headerlink" href="#formal-verification" title="永久链接至标题">¶</a></h3>
+<ol class="arabic simple">
+<li><p>the algorithm that the chip implements is re-constructed from gate level netlists</p></li>
+<li><p>The Boolean expressions are verified to ensure correctness</p></li>
+<li><p>No need of test vector</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="testing-dft">
+<h2>Testing(DFT)<a class="headerlink" href="#testing-dft" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="timingverification">
+<h2>时序 / TimingVerification<a class="headerlink" href="#timingverification" title="永久链接至标题">¶</a></h2>
 <p>通过 <a class="reference internal" href="../chapter9/index.html"><span class="doc">寄生参数提取</span></a> 提取布线后寄生参数，最终转化为 <cite>sdf</cite> 文件，进行 post-layout gate level simulation 、 <a class="reference internal" href="../chapter10/index.html"><span class="doc">静态时序分析</span></a></p>
 <p>纳米节点下集成电路的时序分析离不开考虑电源的影响，要预先或同时考虑 <a class="reference internal" href="../chapter11/index.html"><span class="doc">功耗分析</span></a>;同时需要考虑噪声对时序的影响，故要预先或同时考虑 <a class="reference internal" href="../chapter12/index.html"><span class="doc">信号完整性分析</span></a> 的相互牵制关系</p>
-<p>logic simulation</p>
+</div>
+<div class="section" id="id2">
+<h2>面积<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="id3">
-<h2>面积<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
-</div>
-<div class="section" id="id4">
-<h2>拥堵<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<h2>拥堵<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>Designs are considered <strong>congested</strong> when the wires needed to connect design components
 become greater than the space available to put the wires.</p>
 </div>
+<div class="section" id="id4">
+<h2>功耗<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+</div>
 <div class="section" id="id5">
-<h2>功耗<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>信号完整性<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
 </div>
 <div class="section" id="id6">
-<h2>信号完整性<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<h2>可靠性<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
 </div>
-<div class="section" id="id7">
-<h2>可靠性<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<div class="section" id="physical-verification">
+<h2>Physical Verification<a class="headerlink" href="#physical-verification" title="永久链接至标题">¶</a></h2>
 </div>
 </div>
 
