@@ -7,7 +7,7 @@ Welcome to VLSI物理设计方法学's documentation!
 ======================================
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 3
    :caption: Contents:
    
    ./chapter1/index.rst

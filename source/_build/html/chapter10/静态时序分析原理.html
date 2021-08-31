@@ -36,6 +36,7 @@
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/translations.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -170,6 +171,15 @@
             
   <div class="section" id="id1">
 <h1>静态时序分析的原理<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>在静态时序分析中，最重要的任务就是 <strong>寻找最长延时路径</strong> 以及 <strong>最坏情况下的延时</strong></p>
+</div>
+<p>总延时由逻辑门延时（器件延时）、互连线延时组成：</p>
+<ul class="simple">
+<li><p>器件延时：不仅取决于输入信号的转换（transition）、负载电容，还取决于输出信号的状态（上升/下降），以及其他管脚状态（高电平/低电平）</p></li>
+<li><p>互连线延时：在纳米技术节点下，互连线延时已经超过总延时的 <span class="math notranslate nohighlight">\(50\%\)</span> 以上，其主要是由三维空间的 RC 分布来决定</p></li>
+</ul>
 </div>
 
 
